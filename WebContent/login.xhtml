@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/tenor.gif" />
+		</p:dialog>
+		<h:form>
+			<p:panel id="panel">
+				<p:growl id="growl" sticky="false" />
+				<f:facet name="header">
+					<div align="center">
+						<h1>Login</h1>
+					</div>
+				</f:facet>
+				<div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+						<div class="card card-w-title">
+							<p:panelGrid columns="1"
+								styleClass="form-group ui-panelgrid-blank" layout="grid">
+								<p:outputLabel value="Login: "/>
+								<p:inputText id="itNome"
+									value="#{userController.login}" />
+								<p:outputLabel value="Senha: " />
+								<p:password id="itDescricao"
+									value="#{userController.senha}" />
+							</p:panelGrid>
+						</div>
+					</div>
+				</div>
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Entrar" icon="pi pi-check" process="@form"
+							update="@form" action="#{userController.logar}" />
+
+					</f:facet>
+
+				</p:toolbar>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

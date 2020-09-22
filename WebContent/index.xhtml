@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/tenor.gif" />
+		</p:dialog>
+		<h:form>
+		<p:panel id="panel">
+				<p:growl id="growl" sticky="false" />
+				<f:facet name="header">
+					<div align="center">
+						<h1>Bem vindo</h1>
+					</div>
+				</f:facet>
+				<div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+						<div class="card card-w-title">
+							<h1>Agora pode ir embora</h1>
+						</div>
+					</div>
+				</div>
+				<p:toolbar>
+	
+
+				</p:toolbar>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
