@@ -1,18 +1,75 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
-                xmlns:h="http://java.sun.com/jsf/html" 
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets" 
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:ph="http://primefaces.org/harmony">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ph="http://primefaces.org/harmony">
+	<div class="layout-sidebar">
+		<p:graphicImage name="layout/images/logo.png" url="index.xhtml" styleClass="sidebar-logo" />
+	
+        <p:menu position="left" styleClass="menu-esquerda" style="width: 100%">
+						<p:menuitem value="Inicio" icon="fas fa-home"
+							url="index.xhtml"  />
+		</p:menu>
+		
+		<p:accordionPanel activeIndex="null" event="mouseover" autoHeight="true"
+			styleClass="painel someStyleClass">
+			<p:tab>
+			 <f:facet name="title">
+		        <i class="fas fa-pencil-alt" />
+		        <h:outputText value=" Cadastros"/>
+            </f:facet>
+				<h:form id="form-menu-esquerda" styleClass="form-menu-esquerda">
+					<p:menu position="left" styleClass="menu-esquerda" style="width: 100%">
+						<p:menuitem value="Unidade de Medida" icon="fas fa-ruler"
+							url="unidadedemedida.xhtml" />
+						<p:menuitem value="Categoria" icon="fas fa-clipboard-list" url="categoria.xhtml" />
+						<p:menuitem value="Graos" icon="fas fa-seedling" url="graos.xhtml"
+							 />
+						<p:menuitem value="Agricultor" icon="pi pi-user" url="agricultor.xhtml"
+							 />
+						<p:menuitem value="Motorista" icon="fas fa-tractor" url="motorista.xhtml"
+							 />
+						<p:menuitem value="Armazéms" icon="fas fa-warehouse" url="armazem.xhtml"
+							 />
+						<p:menuitem value="Plano de Contas" icon="fas fa-barcode" url="contas.xhtml"
+							 />
+						<p:menuitem value="Ventilação" icon="fas fa-fan" url="ventilacao.xhtml"
+							 />
+						<p:menuitem value="Marca Ventilação" icon="fas fa-scroll" url="marca.xhtml"
+							 />
+					</p:menu>
+				</h:form>
+			</p:tab>
+			<p:tab>
+			 <f:facet name="title">
+		        <i class="fas fa-truck" />
+		        <h:outputText value=" Movimentações"/>
+            </f:facet>
+				<h:form id="form-menu-esquerda2" styleClass="form-menu-esquerda">
+					<p:menu position="left" styleClass="menu-esquerda" style="width: 100%">
+						<p:menuitem value="Armazenar Grãos" icon="fas fa-warehouse"
+							url="armazenarGraos.xhtml" />
+						<p:menuitem value="Retirar Grãos" icon="fas fa-warehouse" url="retirarGraos.xhtml"
+							 />
+						<p:menuitem value="Situação Armazéms" icon="fas fa-cash-register" url="historico.xhtml"
+							 />
+					</p:menu>
+				</h:form>
+			</p:tab>
+			<p:tab>
+			<f:facet name="title">
+		        <i class="fas fa-cogs" />
+		        <h:outputText value=" Gerenciamento"/>
+            </f:facet>
+				<h:form id="form-menu-esquerda3" styleClass="form-menu-esquerda">
+					<p:menu position="left" styleClass="menu-esquerda" style="width: 100%">
+						<p:menuitem value="Usuários" icon="fas fa-users-cog"
+							url="usuario.xhtml" />
+					</p:menu>
+				</h:form>
+			</p:tab>
+		</p:accordionPanel>
 
-    <div class="layout-sidebar">
-        <ul id="layout-menu" class="layout-menu">
-            <li>
-                <h:link outcome="/produto">
-                    <i class="pi pi-globe" />
-                    <span>Cadastro de Produto</span>
-                </h:link>
-            </li>
-        </ul>
-    </div>
+	</div>
 </ui:composition>

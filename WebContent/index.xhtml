@@ -6,34 +6,34 @@
 	template="/WEB-INF/template/template.xhtml">
 
 	<ui:define name="content">
-		
-		<p:ajaxStatus onstart="PF('statusDialog').show()"
-			onsuccess="PF('statusDialog').hide()" />
-
-		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-			closable="false" resizable="false" showHeader="false">
-			<p:graphicImage name="/images/tenor.gif" />
-		</p:dialog>
 		<h:form>
-		<p:panel id="panel">
-				<p:growl id="growl" sticky="false" />
-				<f:facet name="header">
-					<div align="center">
-						<h1>Bem vindo</h1>
-					</div>
-				</f:facet>
-				<div class="ui-g ui-fluid">
-					<div class="ui-g-12">
-						<div class="card card-w-title">
-							<h1>Agora pode ir embora</h1>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Valor das Sacas</h4>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="">
+								<p:chart type="line" model="#{indexController.lineModel1}"
+									style="height:300px;" />
+								<br />
+								<br />
+								<p:chart type="line" model="#{indexController.lineModel2}"
+									style="height:300px;" />
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="...">Paginação</nav>
 						</div>
 					</div>
 				</div>
-				<p:toolbar>
-	
-
-				</p:toolbar>
-			</p:panel>
+			</div>
 
 		</h:form>
 	</ui:define>

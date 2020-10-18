@@ -1,5 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
 body {
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Roboto", "Open Sans", "Helvetica Neue", sans-serif;
   color: #333333;
   font-size: 14px;
   background-color: #f3f3f3;
@@ -11,10 +12,10 @@ body.layout-scroll-block {
 }
 
 .layout-wrapper .layout-topbar {
-  background: #343c41;
-  height: 60px;
+  background: #1b593c;
+  height: 50px;
   position: fixed;
-  left: 0;
+  left: 250px;
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -25,10 +26,6 @@ body.layout-scroll-block {
 .layout-wrapper .layout-topbar .layout-topbar-content {
   padding: 10px 20px;
   position: relative;
-}
-.layout-wrapper .layout-topbar .layout-topbar-content .topbar-logo {
-  height: 40px;
-  vertical-align: middle;
 }
 .layout-wrapper .layout-topbar .layout-topbar-content .menu-btn {
   display: none;
@@ -55,9 +52,9 @@ body.layout-scroll-block {
 .layout-wrapper .layout-sidebar {
   position: fixed;
   left: 0;
-  top: 60px;
+  top: 0;
   width: 250px;
-  background-color: #23292e;
+  background-color: #1b593c;
   height: 100%;
   z-index: 1000;
   -webkit-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.16);
@@ -99,13 +96,30 @@ body.layout-scroll-block {
 .layout-wrapper .layout-sidebar .layout-menu li a.active i {
   color: #007ad9;
 }
+.layout-wrapper .layout-sidebar .sidebar-logo {
+  height: 120px;
+  vertical-align: middle;
+}
 .layout-wrapper .layout-content {
   margin-left: 250px;
-  padding: 84px 24px 24px 24px;
+  padding: 100px 24px 24px 24px;
+}
+.layout-wrapper .layout-content .card-header {
+  background-color: #fff;
+  border-bottom: none;
+}
+.layout-wrapper .layout-content .card-header .card-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: normal;
+}
+.layout-wrapper .layout-content .card-footer {
+  background-color: #fff;
+  border-top: none;
 }
 .layout-wrapper .layout-footer {
   width: 100%;
-  background-color: #343c41;
+  background-color: #1b593c;
   padding: 16px;
   padding-left: 266px;
   color: #d8d8d8;
@@ -146,7 +160,10 @@ body.layout-scroll-block {
 
 @media (max-width: 1024px) {
   .layout-wrapper .layout-topbar .layout-topbar-content .topbar-logo {
-    height: 28px;
+    height: 200px;
+    max-height: 200px;
+    width: 400px;
+    max-width: 400px;
     margin-top: 6px;
   }
   .layout-wrapper .layout-topbar .layout-topbar-content .menu-btn {

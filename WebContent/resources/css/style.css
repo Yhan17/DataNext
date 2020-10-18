@@ -1,0 +1,11 @@
+.someStyleClass.ui-accordion .ui-accordion-header span.ui-icon  {
+	margin-top: 2px;
+  	float: right;
+}
+.layout-footer {
+	position: fixed;
+	bottom: 0;
+	left: 0px;
+	right: 0px;
+	height: 40px;
+}

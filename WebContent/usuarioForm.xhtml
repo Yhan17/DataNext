@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Usuário</h4>
+
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="usuario.xhtml?faces-redirect=true"
+										value="Voltar" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+							<div class="col-md-12">
+									<label>Imagem *</label><br />
+									 <input type="file" />
+								</div>
+								<div class="col-md-4">
+									<label>Nome *</label> <input class="form-control"></input>
+								</div>
+								<div class="col-md-4">
+									<label>Cpf *</label> <input class="form-control"></input>
+								</div>
+								<div class="col-md-4">
+									<label>Email *</label> <input class="form-control"></input>
+								</div>
+								<div class="col-md-6">
+									<label>Telefone *</label> <input class="form-control"></input>
+								</div>
+								
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="inp-city_id" class="required">Cidade</label><select
+											name="city_id" id="inp-city_id"
+											class="form-control select2-hidden-accessible" required=""
+											tabindex="-1" aria-hidden="true"></select><span
+											class="select2 select2-container select2-container--default select2-container--focus"
+											dir="ltr" style="width: 100%;"><span class="selection"><span
+												class="select2-selection select2-selection--single"
+												role="combobox" aria-haspopup="true" aria-expanded="false"
+												tabindex="0" aria-labelledby="select2-inp-city_id-container"><span
+													class="select2-selection__rendered"
+													id="select2-inp-city_id-container"><span
+														class="select2-selection__placeholder">Selecione a
+															Cidade</span></span><span class="select2-selection__arrow"
+													role="presentation"><b role="presentation"></b></span></span></span><span
+											class="dropdown-wrapper" aria-hidden="true"></span></span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label>Senha *</label> <input class="form-control"></input>
+								</div>
+								<div class="col-md-6">
+									<label>Confirmar Senha *</label> <input class="form-control"></input>
+								</div>
+								
+							</div>
+						</div>
+						<div class="card-footer py-4">
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

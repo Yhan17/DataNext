@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
 @mixin shadow($value) {
     -webkit-box-shadow: $value;
     -moz-box-shadow: $value;
@@ -5,7 +6,7 @@
 }
 
 body {
-    font-family: "Open Sans","Helvetica Neue",sans-serif;
+    font-family: 'Roboto',"Open Sans","Helvetica Neue",sans-serif;
     color: #333333;
     font-size: 14px;
     background-color: #f3f3f3;
@@ -19,10 +20,10 @@ body {
 
 .layout-wrapper {
     .layout-topbar {
-        background: #343c41;
-        height: 60px;
+        background: #1b593c;
+        height: 50px;
         position: fixed;
-        left: 0;
+        left: 250px;
         top: 0;
         width: 100%;
         z-index: 1000;
@@ -32,10 +33,10 @@ body {
             padding: 10px 20px;
             position: relative;
 
-            .topbar-logo {
-                height: 40px;
-                vertical-align: middle;
-            }
+            // .topbar-logo {
+            //     height: 80px;
+            //     vertical-align: middle;
+            // }
     
             .menu-btn {
                 display: none;
@@ -67,9 +68,9 @@ body {
     .layout-sidebar {
         position: fixed;
         left: 0;
-        top: 60px;
+        top: 0;
         width: 250px;
-        background-color: #23292e;
+        background-color: #1b593c;
         height: 100%;
         z-index: 1000;
         @include shadow(0 0 16px 0 rgba(0, 0, 0, 0.16));
@@ -116,16 +117,34 @@ body {
                 }
             }
         }
+        .sidebar-logo {
+            height: 120px;
+            vertical-align: middle;
+        }
     }
 
     .layout-content {
         margin-left: 250px;
-        padding: 84px 24px 24px 24px;
+        padding: 100px 24px 24px 24px;
+
+        .card-header{
+            background-color: #fff;
+            border-bottom: none;
+            .card-title {
+                font-family: 'Roboto', sans-serif;
+                font-size: 25px;
+                font-weight: normal;
+            }
+        }
+        .card-footer{
+            background-color: #fff;
+            border-top: none;
+        }
     }
 
     .layout-footer {
         width: 100%;
-        background-color: #343c41;
+        background-color: #1b593c;
         padding: 16px;
         padding-left: 266px;
         color: #d8d8d8;
@@ -177,7 +196,10 @@ body {
         .layout-topbar {
             .layout-topbar-content {   
                 .topbar-logo {
-                    height: 28px;
+                    height: 200px;
+                    max-height: 200px;
+                    width: 400px;
+                    max-width: 400px;
                     margin-top: 6px;
                 }
 

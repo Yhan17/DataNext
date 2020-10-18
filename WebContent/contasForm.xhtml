@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Plano de Contas</h4>
+
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="contas.xhtml?faces-redirect=true"
+										value="Voltar" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+								<div class="col-md-6">
+									<label>Descrição *</label> <input class="form-control"></input>
+								</div>
+								<div class="col-md-6">
+									<label>Bloqueado *</label> <select name="specialties[]"
+										id="inp-specialties[]" class="form-control">
+										<option value="1">Sim</option>
+										<option value="2">Não</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label>Obrigatório *</label> <select name="specialties[]"
+										id="inp-specialties[]" class="form-control">
+										<option value="1">Sim</option>
+										<option value="2">Não</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label>Tipo de Conta *</label> <select name="specialties[]"
+										id="inp-specialties[]" class="form-control">
+										<option value="1">Credora</option>
+										<option value="2">Devedora</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label>Preço *</label> <input class="form-control"></input>
+								</div>
+								<div class="col-md-12">
+									<label>Plano de Custo *</label> <select name="specialties[]"
+										id="inp-specialties[]" class="form-control">
+										<option value="1">Plano 1</option>
+										<option value="2">Plano 2</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

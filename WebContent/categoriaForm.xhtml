@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Categoria</h4>
+									
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="categoria.xhtml?faces-redirect=true" value="Voltar"/>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+									<div class="col-md-12">
+										<label>Sigla *</label> 
+										<input class="form-control"></input>
+									</div>
+									<div class="col-md-12">
+										<label>Descrição *</label> 
+										<textarea class="form-control"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer py-4">
+								<nav class="d-flex justify-content-end" aria-label="..."></nav>
+							</div>
+						</div>
+					</div>
+				</div>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
