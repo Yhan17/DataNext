@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/template/template.xhtml">
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<ui:define name="content">
 		<h:form>
@@ -25,26 +26,21 @@
 						<div class="card-body">
 
 							<div class="row">
-							<div class="col-md-12">
-									<label>Nome *</label>
-									<input class="form-control"></input>
+								<div class="col-md-12">
+									<label>Nome *</label> <input class="form-control"></input>
 								</div>
 								<div class="col-md-6">
-									<label>Unidade De Medida *</label> 
-									<select name="specialties[]"
-										id="inp-specialties[]" class="form-control" >
-										<option
-											value="">Selecione...</option>
+									<label>Unidade De Medida *</label> <select name="specialties[]"
+										id="inp-specialties[]" class="form-control">
+										<option value="">Selecione...</option>
 										<option value="1">unidade 1</option>
 										<option value="2">unidade 2</option>
 									</select>
 								</div>
 								<div class="col-md-6">
-									<label>Categoria *</label> 
-									<select name="specialties[]"
-										id="inp-specialties[]" class="form-control" >
-										<option
-											value="">Selecione...</option>
+									<label>Categoria *</label> <select name="specialties[]"
+										id="inp-specialties[]" class="form-control">
+										<option value="">Selecione...</option>
 										<option value="1">categoria 1</option>
 										<option value="2">categoria 2</option>
 									</select>
@@ -56,11 +52,14 @@
 							</div>
 						</div>
 						<div class="card-footer py-4">
-							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+													<p:commandButton class="btn btn-success float-right mt-4"
+										action="armazenarGraos.xhtml?faces-redirect=true"
+										value="Enviar" />
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</h:form>
 	</ui:define>
 

@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/template/template.xhtml">
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<ui:define name="content">
 		<h:form>
@@ -18,22 +19,42 @@
 							</div>
 						</div>
 						<div class="card-body">
-						<div class="row">
+							<div class="row">
 								<div class="col-md-10">
 									<div class="form-group">
-										<label for="inp-doctor_id" class="">Armazém</label>
-										<select class="form-control">
-										<option >Selecione...</option>
-											
+										<label for="inp-doctor_id" class="">Armazém</label> <select
+											class="form-control">
+											<option>Selecione...</option>
+
 										</select>
 									</div>
 								</div>
-								<div class="col-md-2" >
-									<p:commandButton value="Pesquisar" id="withIcon" styleClass="mt-4 mr-3" action="agricultorForm.xhtml?faces-redirect=true"  style="margin-right:20px;width:100%;"  icon="pi pi-search" />
-									
+								<div class="col-md-2">
+									<p:commandButton value="Pesquisar" id="withIcon"
+										styleClass="mt-4 mr-3"
+										action="agricultorForm.xhtml?faces-redirect=true"
+										style="margin-right:20px;width:100%;" icon="pi pi-search" />
+
 								</div>
 
 							</div>
+							<div class="col-md-12" style="padding: 0 0 0 0">
+								<p style="width: 100%;">
+									<b>Legenda:</b> 
+									<span
+										style="margin-right: 10px; margin-left: 5px;"> <i class="fa fa-square" aria-hidden="true" style="color: #084600;"></i> Vazio
+									</span> 
+									<span style="margin-right: 10px;"> <i
+										class="fa fa-square" aria-hidden="true" style="color: #084aff;"></i>Parcialmente Vazio </span> 
+										<span style="margin-right: 10px;">
+												<i class="fa fa-square" aria-hidden="true" style="color: #e7eb14;"></i> Parcialmente Cheio
+										</span> 
+										<span style="margin-right: 10px;">
+										 <i class="fa fa-square" aria-hidden="true" style="color: #fc0000;"></i> Lotado
+										</span> 
+								</p>
+							</div>
+
 							<div class="">
 								<table class="table tablesorter table-striped" id="">
 									<thead class=" text-primary">

@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/template/template.xhtml">
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<ui:define name="content">
 		<h:form>
@@ -60,22 +61,26 @@
 									</select>
 								</div>
 								<div class="col-md-12">
-									<h5 style="text-align:center; padding-top: 40px">Quantidade de grãos no armazém: xx Unidade de Medida</h5>
+									<h5 style="text-align: center; padding-top: 40px">Quantidade
+										de grãos no armazém: xx Unidade de Medida</h5>
 								</div>
 								<div class="col-md-12">
-									<label>Quantidade a ser retirada *</label> <input
-										type="text" class="form-control" disabled="disabled"></input>
+									<label>Quantidade a ser retirada *</label> <input type="text"
+										class="form-control" disabled="disabled"></input>
 								</div>
-								
+
 
 							</div>
 						</div>
 						<div class="card-footer py-4">
-							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+													<p:commandButton class="btn btn-success float-right mt-4"
+										action="armazenarGraos.xhtml?faces-redirect=true"
+										value="Enviar" />
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</h:form>
 	</ui:define>
 
