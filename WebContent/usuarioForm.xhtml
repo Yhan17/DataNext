@@ -26,55 +26,64 @@
 						<div class="card-body">
 
 							<div class="row">
-								<div class="col-md-12">
-									<label>Imagem *</label><br /> <input type="file" />
+								<div class="col-md-4">
+									<label>Nome *</label>
+									<p:inputText id="itNome"
+										value="#{adminUsuarioController.entity.pessoa.nome}"
+										styleClass="form-control"></p:inputText>
 								</div>
 								<div class="col-md-4">
-									<label>Nome *</label> <input class="form-control"></input>
+									<label>Cpf *</label>
+									<p:inputMask mask="999.999.999-99" id="itNif"
+										value="#{adminUsuarioController.entity.pessoa.nif}"
+										styleClass="form-control"></p:inputMask>
+
 								</div>
 								<div class="col-md-4">
-									<label>Cpf *</label> <input class="form-control"></input>
-								</div>
-								<div class="col-md-4">
-									<label>Email *</label> <input class="form-control"></input>
+									<label>Email *</label>
+									<p:inputText id="itEmail"
+										value="#{adminUsuarioController.entity.pessoa.email}"
+										styleClass="form-control"></p:inputText>
 								</div>
 								<div class="col-md-6">
-									<label>Telefone *</label> <input class="form-control"></input>
+									<label>Telefone *</label>
+									<p:inputMask mask="(99) 99999-9999" id="itPhone"
+										value="#{adminUsuarioController.entity.pessoa.telefone}"
+										styleClass="form-control"></p:inputMask>
 								</div>
 
 								<div class="col-md-6">
 									<div class="form-group">
-										<label for="inp-city_id" class="required">Cidade</label><select
-											name="city_id" id="inp-city_id"
-											class="form-control select2-hidden-accessible" required=""
-											tabindex="-1" aria-hidden="true"></select><span
-											class="select2 select2-container select2-container--default select2-container--focus"
-											dir="ltr" style="width: 100%;"><span class="selection"><span
-												class="select2-selection select2-selection--single"
-												role="combobox" aria-haspopup="true" aria-expanded="false"
-												tabindex="0" aria-labelledby="select2-inp-city_id-container"><span
-													class="select2-selection__rendered"
-													id="select2-inp-city_id-container"><span
-														class="select2-selection__placeholder">Selecione a
-															Cidade</span></span><span class="select2-selection__arrow"
-													role="presentation"><b role="presentation"></b></span></span></span><span
-											class="dropdown-wrapper" aria-hidden="true"></span></span>
+										<label for="inp-city_id" class="required">Cidade</label>
+										<p:autoComplete style="width:100%" styleClass="city-id"
+											value="#{adminUsuarioController.entity.pessoa.cidade}"
+											forceSelection="true"
+											placeholder="Informe ao menos 3 letras para iniciar a consulta..."
+											minQueryLength="3" dropdown="false" maxResults="5"
+											moreText="Ainda tem mais ..." var="obj"
+											itemLabel="#{obj.nome.concat('-').concat(obj.estado.uf)}"
+											itemValue="#{obj}"
+											completeMethod="#{adminUsuarioController.completeCidade}" />
 									</div>
 								</div>
 								<div class="col-md-6">
-									<label>Senha *</label> <input class="form-control"></input>
+									<label>Senha *</label>
+									<p:password id="pwd1" styleClass="form-control" value="#{adminUsuarioController.entity.senha}" match="pwd2" feedback="true" required="true" />
 								</div>
 								<div class="col-md-6">
-									<label>Confirmar Senha *</label> <input class="form-control"></input>
+									<label>Confirmar Senha *</label>
+									<p:password id="pwd2" styleClass="form-control" value="#{adminUsuarioController.entity.senha}" feedback="true" required="true" />
+									
 								</div>
 
 							</div>
 						</div>
 						<div class="card-footer py-4">
-						
-												<p:commandButton class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
-										value="Enviar" /></div>
+
+							<p:commandButton class="btn btn-success float-right mt-4"
+									action="#{adminUsuarioController.salvar}"
+									value="Salvar" />
+						</div>
 					</div>
 				</div>
 			</div>

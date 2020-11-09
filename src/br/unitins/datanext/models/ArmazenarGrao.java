@@ -2,10 +2,14 @@ package br.unitins.datanext.models;
 
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
-public class ArmazenarGrao extends DefaultEntity {
+public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
 	private Time horarioArmazenagem;
 	private String estadoDoGrao;
 	private String umidadeRelativaDoAr;
@@ -16,10 +20,16 @@ public class ArmazenarGrao extends DefaultEntity {
 	private String etapaArmazenamento;
 	private Double custoArmazenagem;
 	private Double quantidadeArmazenada;
+	@ManyToOne
 	private Motorista motorista;
+	@ManyToOne
 	private Grao grao;
+	@ManyToOne
 	private Armazem armazem;
+	@ManyToOne
 	private Agricultor agricultor;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true)
 	private Endereco endereco;
 
 	public Time getHorarioArmazenagem() {

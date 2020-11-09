@@ -1,10 +1,12 @@
 package br.unitins.datanext.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Situacao extends DefaultEntity {
+public class Situacao extends DefaultEntity<Situacao> {
 	private Double quantidadeArmazenada;
+	@ManyToOne
 	private Armazem armazem;
 	private StatusArmazem status;
 

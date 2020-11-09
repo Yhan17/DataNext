@@ -1,12 +1,16 @@
 package br.unitins.datanext.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"Usuario\"")
-public class Usuario extends DefaultEntity {
-
+@Table(name = "\"usuario\"")
+public class Usuario extends DefaultEntity<Usuario> {
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true)
 	private Pessoa pessoa;
 	private String senha;
 

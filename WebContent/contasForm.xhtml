@@ -26,46 +26,66 @@
 						<div class="card-body">
 
 							<div class="row">
-								<div class="col-md-6">
-									<label>Descrição *</label> <input class="form-control"></input>
-								</div>
-								<div class="col-md-6">
-									<label>Bloqueado *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="1">Sim</option>
-										<option value="2">Não</option>
-									</select>
+								<div class="col-md-4">
+									<label>Descrição *</label> 
+									<p:inputText id="itMarca" value="#{adminPlanoDeCustoController.entity.descricao}" styleClass="form-control"></p:inputText>
+									
 								</div>
 								<div class="col-md-4">
-									<label>Obrigatório *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="1">Sim</option>
-										<option value="2">Não</option>
-									</select>
+									<label>Dt. Contabilidade *</label> 
+									<p:datePicker style="width:100%" id="popup" value="#{adminPlanoDeCustoController.entity.dataContabilidade}" >
+									</p:datePicker>
+									
 								</div>
 								<div class="col-md-4">
-									<label>Tipo de Conta *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="1">Credora</option>
-										<option value="2">Devedora</option>
-									</select>
+									<label>Bloqueado *</label> 
+									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.bloqueado}">
+										<f:selectItem itemValue="true" itemLabel="Sim"/>
+										<f:selectItem itemValue="false" itemLabel="Não"/>
+									</p:selectOneMenu>
+								
 								</div>
 								<div class="col-md-4">
-									<label>Preço *</label> <input class="form-control"></input>
+									<label>Obrigatório *</label> 	
+									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.obrigatorio}">
+										<f:selectItem itemValue="true" itemLabel="Sim"/>
+										<f:selectItem itemValue="false" itemLabel="Não"/>
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-4">
+									<label>Tipo de Conta *</label> 
+									
+									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.tipoConta}" >
+									<f:selectItem itemLabel="Selecione ..."/>
+									<f:selectItems 
+										value="#{adminPlanoDeCustoController.listaTipoConta}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.label}"/>
+								</p:selectOneMenu>
+								</div>
+								<div class="col-md-4">
+									<label>Preço *</label> 
+									<p:inputText id="itPreco" value="#{adminPlanoDeCustoController.entity.preco}" styleClass="form-control"></p:inputText>
+									
 								</div>
 								<div class="col-md-12">
-									<label>Plano de Custo *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="1">Plano 1</option>
-										<option value="2">Plano 2</option>
-									</select>
+									<label>Plano de Custo</label> 
+									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.dependentes}" >
+										<f:selectItem itemLabel="Selecione ..."/>
+										<f:selectItems 
+										value="#{adminPlanoDeCustoController.listaDependente}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.descricao}"/>
+									</p:selectOneMenu>
 								</div>
 							</div>
 						</div>
 						<div class="card-footer py-4">
-													<p:commandButton class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
-										value="Enviar" />
+							<p:commandButton class="btn btn-success float-right mt-4"
+									action="#{adminPlanoDeCustoController.salvar}"
+									value="Salvar" />
 						</div>
 					</div>
 				</div>

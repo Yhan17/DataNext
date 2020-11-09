@@ -1,12 +1,15 @@
 package br.unitins.datanext.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Grao extends DefaultEntity {
+public class Grao extends DefaultEntity<Grao> {
 	private String nome;
 	private String descricao;
+	@ManyToOne
 	private UnidadeDeMedida unidadeDeMedida;
+	@ManyToOne
 	private Categoria categoria;
 
 	public String getNome() {

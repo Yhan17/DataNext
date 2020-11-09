@@ -3,18 +3,27 @@ package br.unitins.datanext.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OrderColumn;
 
 @Entity
-public class PlanoDeCusto extends DefaultEntity {
+public class PlanoDeCusto extends DefaultEntity<PlanoDeCusto> {
 	private Date dataContabilidade;
 	private Boolean bloqueado;
 	private Boolean obrigatorio;
 	private Double preco;
 	private String descricao;
+	@ManyToMany(cascade=CascadeType.PERSIST) 
+	@JoinTable(name="PlanoDeCustoRelationShip", joinColumns = {@JoinColumn(name="plano_id")}, inverseJoinColumns={@JoinColumn(name="dependente_id")})  
+	@OrderColumn
 	private List<PlanoDeCusto> dependentes;
 	private TipoConta tipoConta;
-
+	
 	public Date getDataContabilidade() {
 		return dataContabilidade;
 	}

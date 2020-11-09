@@ -3,16 +3,16 @@ package br.unitins.datanext.models;
 import javax.persistence.Entity;
 
 @Entity
-public class UnidadeDeMedida extends DefaultEntity {
-	private String unidadeMedida;
+public class UnidadeDeMedida extends DefaultEntity<UnidadeDeMedida> {
+	private String unidadeDeMedida;
 	private String descricao;
 
-	public String getUnidadeMedida() {
-		return unidadeMedida;
+	public String getUnidadeDeMedida() {
+		return unidadeDeMedida;
 	}
 
-	public void setUnidadeMedida(String unidadeMedida) {
-		this.unidadeMedida = unidadeMedida;
+	public void setUnidadeDeMedida(String unidadeDeMedida) {
+		this.unidadeDeMedida = unidadeDeMedida;
 	}
 
 	public String getDescricao() {

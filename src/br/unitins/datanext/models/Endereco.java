@@ -1,6 +1,9 @@
 package br.unitins.datanext.models;
 
-public class Endereco {
+import javax.persistence.Entity;
+
+@Entity
+public class Endereco extends DefaultEntity<Endereco> {
 	private String endereco;
 
 	public String getEndereco() {

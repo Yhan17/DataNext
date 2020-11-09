@@ -3,7 +3,7 @@ package br.unitins.datanext.models;
 import javax.persistence.Entity;
 
 @Entity
-public class MarcaVentilacao extends DefaultEntity {
+public class MarcaVentilacao extends DefaultEntity<MarcaVentilacao> {
 	private String marca;
 	private String descricao;
 

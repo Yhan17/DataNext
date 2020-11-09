@@ -1,13 +1,18 @@
 package br.unitins.datanext.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Agricultor extends DefaultEntity {
+public class Agricultor extends DefaultEntity<Agricultor> {
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true)
 	private Pessoa pessoa;
 	private String imagem;
 	private Boolean status;
-
+	
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

@@ -1,10 +1,15 @@
 package br.unitins.datanext.models;
 
-public class Pessoa {
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Pessoa extends DefaultEntity<Pessoa>{
 	private String nome;
 	private String nif;
 	private String email;
 	private String telefone;
+	@ManyToOne
 	private Cidade cidade;
 
 	public String getNome() {

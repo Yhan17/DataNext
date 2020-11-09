@@ -27,18 +27,19 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<label>Marca *</label> <input class="form-control"></input>
+									<label>Marca *</label> 
+									<p:inputText id="itMarca" value="#{adminMarcaController.entity.marca}" styleClass="form-control"></p:inputText>
 								</div>
 								<div class="col-md-12">
 									<label>Descrição *</label>
-									<textarea class="form-control"></textarea>
+									<p:inputTextarea id="itDescricao" value="#{adminMarcaController.entity.descricao}" styleClass="form-control"></p:inputTextarea>
 								</div>
 							</div>
 						</div>
 						<div class="card-footer py-4">
 													<p:commandButton class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
-										value="Enviar" />
+										action="#{adminMarcaController.salvar}"
+										value="Salvar" />
 						</div>
 					</div>
 				</div>

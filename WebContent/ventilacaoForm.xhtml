@@ -26,25 +26,43 @@
 						<div class="card-body">
 
 							<div class="row">
-								<div class="col-md-4">
-									<label>Nome Ventilação *</label> <input class="form-control"></input>
+								<div class="col-md-6">
+									<label>Nome Ventilador *</label>
+									<p:inputText id="itNome" value="#{adminVentilacaoController.entity.nome}" styleClass="form-control"></p:inputText>
+									
 								</div>
-								<div class="col-md-4">
-									<label>Velocidade Rpm's *</label> <input class="form-control"></input>
+								<div class="col-md-6">
+									<label>Velocidade Rpm's *</label> 
+									<p:inputText id="itVelocidade" value="#{adminVentilacaoController.entity.velocidadeRpm}" styleClass="form-control"></p:inputText>
+									
 								</div>
-								<div class="col-md-4">
-									<label>Preço *</label> <input class="form-control"></input>
+								<div class="col-md-6">
+									<label>Preço *</label> 
+									<p:inputText id="itPreco" value="#{adminVentilacaoController.entity.kilowats}" styleClass="form-control"></p:inputText>
+									
+								</div>
+								<div class="col-md-6">
+									<label>Marca *</label> 
+									<p:selectOneMenu style="width:100%" value="#{adminVentilacaoController.entity.marca}" >
+										<f:selectItem itemLabel="Selecione ..."/>
+										<f:selectItems 
+										value="#{adminVentilacaoController.listaMarca}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.marca}"/>
+									</p:selectOneMenu>
+									
 								</div>
 								<div class="col-md-12">
 									<label>Descrição *</label>
-									<textarea class="form-control"></textarea>
+									<p:inputTextarea id="itDescricao" value="#{adminVentilacaoController.entity.descricao}" styleClass="form-control"></p:inputTextarea>
 								</div>
 							</div>
 						</div>
 						<div class="card-footer py-4">
-													<p:commandButton class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
-										value="Enviar" />
+						<p:commandButton class="btn btn-success float-right mt-4"
+									action="#{adminVentilacaoController.salvar}"
+									value="Salvar" />
 						</div>
 					</div>
 				</div>

@@ -32,3 +32,10 @@ label#thumbnail.has-thumbnail {
 label#thumbnail.has-thumbnail img{
     display: none;
 }
+.city-id > input {
+	width: 100%;
+}
+
+.capacidade > input {
+	width: 100%;
+}

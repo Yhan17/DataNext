@@ -8,6 +8,7 @@
 
 	<ui:define name="content">
 		<h:form>
+		<p:growl id="growl" sticky="false" life="500"/> 
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card ">
@@ -22,29 +23,41 @@
 							</div>
 						</div>
 						<div class="card-body">
-
+							<div class="row">
+								<div class="col-md-10">
+									<p:inputText id="dtFiltro" value="#{adminUnidadeMedidaController.filtro}" styleClass="form-control"></p:inputText>
+								</div>
+								<div class="col-md-2">
+									<p:commandButton actionListener="#{adminUnidadeMedidaController.pesquisar}" value="Pesquisar" 
+									process="@this dtFiltro"
+			    					update="dtDados"/>
+								</div>
+							</div>
+							<br />
 							<div class="">
-								<table class="table tablesorter table-striped" id="">
-									<thead class=" text-primary">
-										<th scope="col">Nome</th>
-										<th scope="col">CPF</th>
-										<th scope="col">Telefone</th>
-										<th scope="col">Cidade</th>
-										<th scope="col">Ativo</th>
-										<th scope="col">Dt. Criação</th>
-										<th scope="col">Dt. Atualização</th>
-										<th scope="col" class="text-right">Ação</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td colspan="20"
-												style="text-align: center; font-size: 1.1em;">Nenhuma
-												informação cadastrada.</td>
-										</tr>
-
-
-									</tbody>
-								</table>
+								<p:dataTable id="dtDados" value="#{adminUnidadeMedidaController.listaUnidadeDeMedida}"
+			    			 		var="obj">
+										<p:column>
+							    			<f:facet name="header">Id</f:facet>
+							    			<p:outputLabel value="#{obj.id}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Unidade De Medida</f:facet>
+							    			<p:outputLabel value="#{obj.unidadeDeMedida}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Editar</f:facet>
+							    			<p:commandButton value="Editar" style="width: 100%" action="#{adminUnidadeMedidaController.editar(obj)}"></p:commandButton>
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Deletar</f:facet>
+							    			<p:commandButton value="Excluir" style="width: 100%" action="#{adminUnidadeMedidaController.excluir(obj)}" 
+							    			process="@this"
+							    			update="dtDados"
+							    			></p:commandButton>
+							    		</p:column>
+							    		
+									</p:dataTable>
 							</div>
 						</div>
 						<div class="card-footer py-4">

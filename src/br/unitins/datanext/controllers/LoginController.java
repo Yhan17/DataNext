@@ -15,7 +15,7 @@ import br.unitins.datanext.models.Usuario;
 
 @Named
 @ViewScoped
-public class UsuarioController implements Serializable {
+public class LoginController implements Serializable {
 
 	private static final long serialVersionUID = 6390586700046658201L;
 	private Usuario user;

@@ -8,6 +8,8 @@
 
 	<ui:define name="content">
 		<h:form>
+				<p:growl id="growl" sticky="false" life="500"/> 
+		
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card ">
@@ -24,51 +26,73 @@
 						</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<div class="form-group">
-										<label for="inp-doctor_id" class="">Categoria</label>
-										<select class="form-control">
-										<option >Selecione...</option>
-											
-										</select>
+									<label>Unidade De Medida *</label> 
+									<p:selectOneMenu id="dtFiltro1" style="width:100%"  styleClass="unidadeDeMedida" value="#{adminGraoController.unidadeDeMedida}" >
+										<f:selectItem itemLabel="Selecione ..."/>
+										<f:selectItems 
+										value="#{adminGraoController.listaUnidadeMedida}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.unidadeDeMedida}"/>
+									</p:selectOneMenu>
 									</div>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<div class="form-group">
-										<label for="inp-city_id" class="">Unidade de Medida</label><select class="form-control">
-										<option >Selecione...</option>
-											
-										</select>
+										<label>Categoria *</label> 
+									<p:selectOneMenu id="dtFiltro2" style="width:100%" styleClass="categoria" value="#{adminGraoController.categoria}" >
+										<f:selectItem itemLabel="Selecione ..."/>
+										<f:selectItems 
+										value="#{adminGraoController.listaCategoria}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.sigla}"/>
+									</p:selectOneMenu>
 									</div>
 								</div>
-								<div class="col-md-2" >
-									<p:commandButton value="Pesquisar" id="withIcon" styleClass="mt-4 mr-3" action="agricultorForm.xhtml?faces-redirect=true"  style="margin-right:20px;width:100%;"  icon="pi pi-search" />
+								<div class="col-md-4" >
+									<p:commandButton style="width:100%; margin-top: 28px" styleClass="buttonSearch" actionListener="#{adminGraoController.pesquisar}" value="Pesquisar" 
+									process="@this dtFiltro1 dtFiltro2"
+			    					update="dtDados"
+			    					icon="pi pi-search"/>
 									
 								</div>
 
 							</div>
 							<div class="">
-								<table class="table tablesorter table-striped" id="">
-									<thead class=" text-primary">
-										<th scope="col">Nome</th>
-										<th scope="col">CPF</th>
-										<th scope="col">Telefone</th>
-										<th scope="col">Cidade</th>
-										<th scope="col">Ativo</th>
-										<th scope="col">Dt. Criação</th>
-										<th scope="col">Dt. Atualização</th>
-										<th scope="col" class="text-right">Ação</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td colspan="20"
-												style="text-align: center; font-size: 1.1em;">Nenhuma
-												informação cadastrada.</td>
-										</tr>
-
-
-									</tbody>
-								</table>
+								<p:dataTable id="dtDados" value="#{adminGraoController.listaGrao}"
+			    			 		var="obj">
+										<p:column>
+							    			<f:facet name="header">Id</f:facet>
+							    			<p:outputLabel value="#{obj.id}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Nome</f:facet>
+							    			<p:outputLabel value="#{obj.nome}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Categoria</f:facet>
+							    			<p:outputLabel value="#{obj.categoria.sigla}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Unidade De Medida</f:facet>
+							    			<p:outputLabel value="#{obj.unidadeDeMedida.unidadeDeMedida}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Editar</f:facet>
+							    			<p:commandButton value="Editar" style="width: 100%" action="#{adminGraoController.editar(obj)}"></p:commandButton>
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Deletar</f:facet>
+							    			<p:commandButton value="Excluir" style="width: 100%" action="#{adminGraoController.excluir(obj)}" 
+							    			process="@this"
+							    			update="@form"
+							    			></p:commandButton>
+							    		</p:column>
+							    		
+									</p:dataTable>
 							</div>
 						</div>
 						<div class="card-footer py-4">

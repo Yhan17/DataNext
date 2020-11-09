@@ -1,15 +1,23 @@
 package br.unitins.datanext.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Armazem extends DefaultEntity {
+public class Armazem extends DefaultEntity<Armazem> {
 	private String descricao;
 	private String sigla;
 	private Boolean status;
 	private Double capacidade;
 	private String imagem;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true)
 	private Localizacao localizacao;
+	@ManyToOne
 	private Ventilacao ventilacao;
 
 	public String getDescricao() {

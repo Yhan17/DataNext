@@ -1,15 +1,21 @@
 package br.unitins.datanext.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 
-public class RetirarGrao extends DefaultEntity {
+public class RetirarGrao extends DefaultEntity<RetirarGrao> {
 	private Double quantidade;
+	@ManyToOne
 	private Motorista motorista;
+	@ManyToOne
 	private Grao grao;
+	@ManyToOne
 	private Armazem armazem;
+	@ManyToOne
 	private Agricultor agricultor;
+	@ManyToOne
 	private Endereco endereco;
 
 	public Double getQuantidade() {

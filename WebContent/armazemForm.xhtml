@@ -7,7 +7,7 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<ui:define name="content">
-		<h:form>
+		<h:form enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card ">
@@ -28,50 +28,62 @@
 							<div class="row">
 								<div class="col-md-12">
 									<label>Imagem *</label><br />
-									<label id="thumbnail" >
-										<input type="file"/>
-                    					<img src="./resources/layout/images/camera.svg" 
+									<label id="thumbnail" style="#{empty adminArmazemController.entity.imagem ? ('') : ('height: 100%')}">
+										<input class="imagem" type="file" jsf:value="#{adminArmazemController.imagem}"/>
+                    					<img class="image-thumbnail" 
+                    					src="#{empty adminArmazemController.entity.imagem ? './resources/layout/images/camera.svg' : ('/DataNext/ArmazemImagem?id='.concat(adminArmazemController.entity.id))}" 
 										alt="camera" />
 									</label>
 								</div>
 								<div class="col-md-4">
-									<label>Nome do Armazém *</label> <input class="form-control"></input>
+									<label>Nome do Armazém *</label> 
+									<p:inputText id="itNome" value="#{adminArmazemController.entity.sigla}" styleClass="form-control"></p:inputText>
 								</div>
 								<div class="col-md-4">
-									<label>Ativo *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Sim</option>
-										<option value="2">Não</option>
-									</select>
+									<label>Ativo *</label> 
+									<p:selectOneMenu style="width:100%" value="#{adminArmazemController.entity.status}">
+										<f:selectItem itemValue="true" itemLabel="Sim"/>
+										<f:selectItem itemValue="false" itemLabel="Não"/>
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-4">
-									<label>Ventilação *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Ventilação 1</option>
-										<option value="2">Ventilação 2</option>
-									</select>
+									<label>Ventilação *</label> 
+									<p:selectOneMenu style="width:100%" value="#{adminArmazemController.entity.ventilacao}" >
+										<f:selectItem itemLabel="Selecione ..."/>
+										<f:selectItems 
+										value="#{adminArmazemController.listaVentilacao}" 
+										var="obj" 
+										itemValue="#{obj}"
+										itemLabel="#{obj.nome}"/>
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-4">
-									<label>Capacidade *</label> <input class="form-control"></input>
+									<label>Capacidade *</label> 
+									<p:inputNumber id="input3" styleClass="capacidade" value="#{adminArmazemController.entity.capacidade}" minValue="1" maxValue="1000" decimalPlaces="2">                  	
+                					</p:inputNumber>  
 								</div>
 								<div class="col-md-4">
-									<label>Latitude *</label> <input class="form-control"></input>
+									<label>Latitude *</label>
+									<p:inputText id="itLat" value="#{adminArmazemController.entity.localizacao.latitude}" styleClass="form-control"></p:inputText>
+									
 								</div>
 								<div class="col-md-4">
-									<label>Longitude *</label> <input class="form-control"></input>
+									<label>Longitude *</label>
+									<p:inputText id="itLong" value="#{adminArmazemController.entity.localizacao.longitude}" styleClass="form-control"></p:inputText>
+									
 								</div>
 								<div class="col-md-12">
 									<label>Descrição *</label>
-									<textarea class="form-control"></textarea>
+									<p:inputTextarea id="itDescricao" value="#{adminArmazemController.entity.descricao}" styleClass="form-control"></p:inputTextarea>
 								</div>
 							</div>
 
 						</div>
 						<div class="card-footer py-4">
-							<p:commandButton class="btn btn-success float-right mt-4"
-								action="armazenarGraos.xhtml?faces-redirect=true" value="Enviar" />
+						<p:commandButton class="btn btn-success float-right mt-4"
+									action="#{adminArmazemController.salvar}"
+									ajax="false"
+									value="Salvar" />
 						</div>
 					</div>
 				</div>

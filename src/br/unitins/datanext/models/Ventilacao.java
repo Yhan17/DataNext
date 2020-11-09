@@ -1,12 +1,15 @@
 package br.unitins.datanext.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Ventilacao extends DefaultEntity {
+public class Ventilacao extends DefaultEntity<Ventilacao> {
 	private String descricao;
+	private String nome;
 	private Double velocidadeRpm;
 	private Double kilowats;
+	@ManyToOne
 	private MarcaVentilacao marca;
 
 	public String getDescricao() {
@@ -41,4 +44,13 @@ public class Ventilacao extends DefaultEntity {
 		this.marca = marca;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	
 }

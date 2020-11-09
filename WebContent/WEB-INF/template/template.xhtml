@@ -36,7 +36,12 @@
 	<div class="layout-wrapper">
 		<ui:include src="./sidebar.xhtml" />
 		<ui:include src="./topbar.xhtml" />
-
+		<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	             
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+			    <p:graphicImage name="/images/tenor.gif" />
+			</p:dialog>
+		
 		<div class="layout-content">
 			<ui:insert name="content"></ui:insert>
 		</div>
@@ -54,7 +59,8 @@
 	    <script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/pt-BR.js'></script>
 	    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 	    <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js'></script>
-    	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js'></script>
+	<h:outputScript name="js/script.js" />
 </h:body>
 
 </html>

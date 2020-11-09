@@ -1,6 +1,9 @@
 package br.unitins.datanext.models;
 
-public class Caminhao {
+import javax.persistence.Entity;
+
+@Entity
+public class Caminhao extends DefaultEntity<Caminhao> {
 	private String placaCaminhao;
 	private Double volume;
 	private Integer tamanho;

@@ -1,6 +1,9 @@
 package br.unitins.datanext.models;
 
-public class Localizacao {
+import javax.persistence.Entity;
+
+@Entity
+public class Localizacao extends DefaultEntity<Localizacao>{
 	private String latitude;
 	private String longitude;
 

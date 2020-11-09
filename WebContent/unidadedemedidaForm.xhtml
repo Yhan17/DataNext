@@ -27,22 +27,20 @@
 						<div class="card-body">
 
 							<div class="row">
-								<div class="col-md-6">
-									<label>NCM *</label> <input class="form-control"></input>
-								</div>
-								<div class="col-md-6">
-									<label>Sigla *</label> <input class="form-control"></input>
+								<div class="col-md-12">
+									<label>Sigla *</label> 
+									<p:inputText id="itUnidadeMedida" value="#{adminUnidadeMedidaController.entity.unidadeDeMedida}" styleClass="form-control"></p:inputText>
 								</div>
 								<div class="col-md-12">
 									<label>Descrição *</label>
-									<textarea class="form-control"></textarea>
+									<p:inputTextarea id="itDescricao" value="#{adminUnidadeMedidaController.entity.descricao}" styleClass="form-control"></p:inputTextarea>
 								</div>
 							</div>
 						</div>
 						<div class="card-footer py-4">
 						<p:commandButton class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
-										value="Enviar" />
+										action="#{adminUnidadeMedidaController.salvar}"
+										value="Salvar" />
 						</div>
 					</div>
 				</div>

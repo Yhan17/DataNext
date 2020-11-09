@@ -8,6 +8,8 @@
 
 	<ui:define name="content">
 		<h:form>
+				<p:growl id="growl" sticky="false" life="500"/> 
+		
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card ">
@@ -24,27 +26,40 @@
 						<div class="card-body">
 
 							<div class="">
-								<table class="table tablesorter table-striped" id="">
-									<thead class=" text-primary">
-										<th scope="col">Nome</th>
-										<th scope="col">CPF</th>
-										<th scope="col">Telefone</th>
-										<th scope="col">Cidade</th>
-										<th scope="col">Ativo</th>
-										<th scope="col">Dt. Criação</th>
-										<th scope="col">Dt. Atualização</th>
-										<th scope="col" class="text-right">Ação</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td colspan="20"
-												style="text-align: center; font-size: 1.1em;">Nenhuma
-												informação cadastrada.</td>
-										</tr>
-
-
-									</tbody>
-								</table>
+									<p:dataTable id="dtDados" value="#{adminVentilacaoController.listaVentilacao}"
+			    			 		var="obj">
+										<p:column>
+							    			<f:facet name="header">Id</f:facet>
+							    			<p:outputLabel value="#{obj.id}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Nome</f:facet>
+							    			<p:outputLabel value="#{obj.nome}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Kilowats</f:facet>
+							    			<p:outputLabel value="#{obj.kilowats}" >
+							    			<f:convertNumber locale="pt_BR" currencySymbol="R$"
+											type="currency" />
+							    			</p:outputLabel>
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Velocidade</f:facet>
+							    			<p:outputLabel value="#{obj.velocidadeRpm}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Editar</f:facet>
+							    			<p:commandButton value="Editar" style="width: 100%" action="#{adminVentilacaoController.editar(obj)}"></p:commandButton>
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Deletar</f:facet>
+							    			<p:commandButton value="Excluir" style="width: 100%" action="#{adminVentilacaoController.excluir(obj)}" 
+							    			process="@this"
+							    			update="@form"
+							    			></p:commandButton>
+							    		</p:column>
+							    		
+									</p:dataTable>
 							</div>
 						</div>
 						<div class="card-footer py-4">
