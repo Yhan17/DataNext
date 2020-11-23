@@ -36,6 +36,26 @@ label#thumbnail.has-thumbnail img{
 	width: 100%;
 }
 
+.ui-calendar > input {
+	width: 100%;
+}
 .capacidade > input {
 	width: 100%;
+}
+
+body .ui-picklist .ui-picklist-list  {
+	background-color: none !important;
+}
+
+ul.ui-widget-content.ui-picklist-list.ui-picklist-target.ui-corner-all.ui-sortable {
+	float: right;
+}
+
+.layout-topbar-content {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.customTopBar {
+	color: white;
 }

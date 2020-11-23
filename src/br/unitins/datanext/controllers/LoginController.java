@@ -3,6 +3,8 @@ package br.unitins.datanext.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -10,7 +12,11 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.unitins.datanext.application.JPAUtil;
+import br.unitins.datanext.application.Session;
 import br.unitins.datanext.application.Util;
+import br.unitins.datanext.models.Cidade;
+import br.unitins.datanext.models.Estado;
+import br.unitins.datanext.models.Pessoa;
 import br.unitins.datanext.models.Usuario;
 
 @Named
@@ -62,25 +68,35 @@ public class LoginController implements Serializable {
 	}
 
 	public Usuario getUser() {
-		if (user == null)
+		if (user == null) {
 			user = new Usuario();
+			user.setPessoa(new Pessoa());
+			user.getPessoa().setCidade(new Cidade());
+			user.getPessoa().getCidade().setEstado(new Estado());
+		}
 		return user;
 	}
 
 	public String logar() {
 		EntityManager em = JPAUtil.getEntityManager();
-		TypedQuery<Usuario> query = em.createQuery("from User u where u.login = :identificacao and u.password = :senha", Usuario.class);
+		TypedQuery<Usuario> query = em.createQuery("from Usuario u where u.pessoa.email = :identificacao and u.senha = :senha", Usuario.class);
 		String login =  getLogin();
-		String senha = Util.hashSHA256(getSenha());
+		String senha = getSenha();
 		query.setParameter("identificacao",login);
-		query.setParameter("senha",senha);
+		query.setParameter("senha",Util.hashSHA256(senha));
 		try {
 		    setUser(query.getSingleResult());
-		    Util.addInfoMessage("Usuário Encontrado");
-			return "index.xhtml?faces-redirect=true";
+		    Session.getInstance().setAttribute("usuarioLogado", user);
+		    return "adminHome.xhtml?faces-redirect=true";
 		} catch( javax.persistence.NoResultException e ){
-			Util.addErrorMessage("Usuário Não encontrado");
-			return "";
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário Não Encontrado", null));
+					
+					
+					FacesContext.getCurrentInstance()
+						    .getExternalContext()
+						    .getFlash().setKeepMessages(true);			
+			return "login.xhtml?faces-redirect=true";
 		}
 	}
 

@@ -4144,8 +4144,8 @@ body .ui-picklist .ui-picklist-filter-container .ui-icon:before {
   content: "";
 }
 body .ui-picklist .ui-picklist-list {
-  border: none;
-  background-color: #1b593c;
+  border: 1px solid black;
+  background-color: none;
   color: #333333;
   padding: 0;
 }

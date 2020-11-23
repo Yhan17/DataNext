@@ -27,65 +27,72 @@
 
 							<div class="row">
 								<div class="col-md-4">
-									<label>Descrição *</label> 
-									<p:inputText id="itMarca" value="#{adminPlanoDeCustoController.entity.descricao}" styleClass="form-control"></p:inputText>
-									
+									<label>Descrição *</label>
+									<p:inputText id="itMarca"
+										value="#{adminPlanoDeCustoController.entity.descricao}"
+										styleClass="form-control"></p:inputText>
+
 								</div>
 								<div class="col-md-4">
-									<label>Dt. Contabilidade *</label> 
-									<p:datePicker style="width:100%" id="popup" value="#{adminPlanoDeCustoController.entity.dataContabilidade}" >
+									<label>Dt. Contabilidade *</label>
+									<p:datePicker style="width:100%" id="popup"
+										value="#{adminPlanoDeCustoController.entity.dataContabilidade}">
 									</p:datePicker>
-									
+
 								</div>
 								<div class="col-md-4">
-									<label>Bloqueado *</label> 
-									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.bloqueado}">
-										<f:selectItem itemValue="true" itemLabel="Sim"/>
-										<f:selectItem itemValue="false" itemLabel="Não"/>
+									<label>Bloqueado *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminPlanoDeCustoController.entity.bloqueado}">
+										<f:selectItem itemValue="true" itemLabel="Sim" />
+										<f:selectItem itemValue="false" itemLabel="Não" />
 									</p:selectOneMenu>
-								
+
 								</div>
 								<div class="col-md-4">
-									<label>Obrigatório *</label> 	
-									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.obrigatorio}">
-										<f:selectItem itemValue="true" itemLabel="Sim"/>
-										<f:selectItem itemValue="false" itemLabel="Não"/>
+									<label>Obrigatório *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminPlanoDeCustoController.entity.obrigatorio}">
+										<f:selectItem itemValue="true" itemLabel="Sim" />
+										<f:selectItem itemValue="false" itemLabel="Não" />
 									</p:selectOneMenu>
 								</div>
 								<div class="col-md-4">
-									<label>Tipo de Conta *</label> 
-									
-									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.tipoConta}" >
-									<f:selectItem itemLabel="Selecione ..."/>
-									<f:selectItems 
-										value="#{adminPlanoDeCustoController.listaTipoConta}" 
-										var="obj" 
-										itemValue="#{obj}"
-										itemLabel="#{obj.label}"/>
-								</p:selectOneMenu>
+									<label>Tipo de Conta *</label>
+
+									<p:selectOneMenu style="width:100%"
+										value="#{adminPlanoDeCustoController.entity.tipoConta}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminPlanoDeCustoController.listaTipoConta}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-4">
-									<label>Preço *</label> 
-									<p:inputText id="itPreco" value="#{adminPlanoDeCustoController.entity.preco}" styleClass="form-control"></p:inputText>
-									
+									<label>Preço *</label>
+									<p:inputText id="itPreco"
+										value="#{adminPlanoDeCustoController.entity.preco}"
+										styleClass="form-control"></p:inputText>
+
 								</div>
 								<div class="col-md-12">
-									<label>Plano de Custo</label> 
-									<p:selectOneMenu style="width:100%" value="#{adminPlanoDeCustoController.entity.dependentes}" >
-										<f:selectItem itemLabel="Selecione ..."/>
-										<f:selectItems 
-										value="#{adminPlanoDeCustoController.listaDependente}" 
-										var="obj" 
-										itemValue="#{obj}"
-										itemLabel="#{obj.descricao}"/>
+									<label>Plano de Custo</label>
+									<p:pickList style="width:100%" id="pickList" value="#{adminPlanoDeCustoController.dependentes}"
+										var="dependentes" converter="#{tipoContaConverter}" filterMatchMode="contains" itemLabel="#{dependentes.descricao}" itemValue="#{dependentes}" />
+
+									<p:selectOneMenu style="width:100%"
+										value="#{adminPlanoDeCustoController.entity.dependentes}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminPlanoDeCustoController.listaDependente}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.descricao}" />
 									</p:selectOneMenu>
 								</div>
 							</div>
 						</div>
 						<div class="card-footer py-4">
 							<p:commandButton class="btn btn-success float-right mt-4"
-									action="#{adminPlanoDeCustoController.salvar}"
-									value="Salvar" />
+								action="#{adminPlanoDeCustoController.salvar}" value="Salvar" />
 						</div>
 					</div>
 				</div>

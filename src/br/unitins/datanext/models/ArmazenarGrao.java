@@ -18,7 +18,6 @@ public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
 	private Double temperatura;
 	private String condicaoArmazenagem;
 	private String etapaArmazenamento;
-	private Double custoArmazenagem;
 	private Double quantidadeArmazenada;
 	@ManyToOne
 	private Motorista motorista;
@@ -94,14 +93,6 @@ public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
 
 	public void setEtapaArmazenamento(String etapaArmazenamento) {
 		this.etapaArmazenamento = etapaArmazenamento;
-	}
-
-	public Double getCustoArmazenagem() {
-		return custoArmazenagem;
-	}
-
-	public void setCustoArmazenagem(Double custoArmazenagem) {
-		this.custoArmazenagem = custoArmazenagem;
 	}
 
 	public Double getQuantidadeArmazenada() {

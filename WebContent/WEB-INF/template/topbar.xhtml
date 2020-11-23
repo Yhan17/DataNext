@@ -1,26 +1,29 @@
-<ui:composition 
-	xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:h="http://java.sun.com/jsf/html" 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets" 
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:jsf="http://xmlns.jcp.org/jsf">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:jsf="http://xmlns.jcp.org/jsf">
 
-    <div class="layout-topbar">
-        <div class="layout-topbar-content">
-            <a href="#" id="menu-btn" class="menu-btn">
-                <i class="pi pi-bars"></i>
-            </a>
-            
-    
-    		<p:commandLink
-    			value="Olá #{templateController.usuarioLogado.nome} (Sair)" 
-    			rendered="#{templateController.usuarioLogado != null}"
-    			styleClass="topbar-link" 
-    			process="@this"
-    			actionListener="#{templateController.encerrarSessao}"/>
-            
-        </div>
-    </div>
+	<div class="layout-topbar">
+		<div class="layout-topbar-content">
+			<a href="#" id="menu-btn" class="menu-btn"> <i class="pi pi-bars"></i>
+			</a>
+
+			<h:form>
+				<p:growl id="messages" />
+
+				<p:menubar>
+					<p:submenu label="Olá #{adminTemplateController.usuarioLogado.pessoa.nome}" icon="pi pi-user">
+						<p:menuitem value="Perfil" url="profile.xhtml" />
+					</p:submenu>
+
+					<f:facet name="options">
+						<p:commandButton type="button" action="#{adminTemplateController.encerrarSessao}" value="Sair" icon="pi pi-home" />
+					</f:facet>
+				</p:menubar>
+			</h:form>
+
+		</div>
+	</div>
 
 </ui:composition>

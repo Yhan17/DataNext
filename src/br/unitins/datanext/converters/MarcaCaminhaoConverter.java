@@ -4,7 +4,6 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import br.unitins.datanext.models.MarcaCaminhao;
-import br.unitins.datanext.models.TipoConta;
 
 @Converter(autoApply = true)
 public class MarcaCaminhaoConverter implements AttributeConverter<MarcaCaminhao, Integer> {

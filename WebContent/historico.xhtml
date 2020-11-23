@@ -56,27 +56,33 @@
 							</div>
 
 							<div class="">
-								<table class="table tablesorter table-striped" id="">
-									<thead class=" text-primary">
-										<th scope="col">Nome</th>
-										<th scope="col">CPF</th>
-										<th scope="col">Telefone</th>
-										<th scope="col">Cidade</th>
-										<th scope="col">Ativo</th>
-										<th scope="col">Dt. Criação</th>
-										<th scope="col">Dt. Atualização</th>
-										<th scope="col" class="text-right">Ação</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td colspan="20"
-												style="text-align: center; font-size: 1.1em;">Nenhuma
-												informação cadastrada.</td>
-										</tr>
+								<p:dataTable id="dtDados" value="#{adminSituacaoArmazemController.listaSituacao}"
+			    			 		var="obj">
+										<p:column>
+							    			<f:facet name="header">Id</f:facet>
+							    			<p:outputLabel value="#{obj.id}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Armazem Sigla</f:facet>
+							    			<p:outputLabel value="#{obj.armazem.sigla}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Armazem capacidade</f:facet>
+							    			<p:outputLabel value="#{obj.armazem.capacidade}" />
+							    		</p:column>
+							    		<p:column>
+							    			<f:facet name="header">Status</f:facet>
+							    			<i class="fa fa-square" aria-hidden="true" style="color:
+							    			#{obj.status.id == 1 ? '#084600' :
+							    			 (obj.status.id == 2 ? '#084aff' : (
+							    			 obj.status.id == 3 ? '#e7eb14' : (
+							    			 obj.status.id == 4 ? '#fc0000' : '#00000'))) };"></i>
 
-
-									</tbody>
-								</table>
+							    			
+							    		</p:column>
+							  
+							    		
+									</p:dataTable>
 							</div>
 						</div>
 						<div class="card-footer py-4">

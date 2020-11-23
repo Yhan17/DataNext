@@ -20,11 +20,13 @@
 						</div>
 						<div class="card-body">
 
+							<p:messages id="messages" showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
 							<div class="">
 								<p:chart type="line" model="#{adminHomeController.lineModel1}"
 									style="height:300px;" />
-								<br />
-								<br />
+								<br /> <br />
 								<p:chart type="line" model="#{adminHomeController.lineModel2}"
 									style="height:300px;" />
 							</div>

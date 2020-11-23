@@ -15,10 +15,10 @@ body.layout-scroll-block {
   background: #1b593c;
   height: 50px;
   position: fixed;
-  left: 250px;
+  left: 0px;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
   -webkit-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.16);
   -moz-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.16);
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.16);

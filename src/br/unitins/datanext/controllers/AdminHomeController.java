@@ -1,6 +1,8 @@
 package br.unitins.datanext.controllers;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,6 +34,11 @@ import org.primefaces.model.chart.MeterGaugeChartModel;
 import org.primefaces.model.chart.OhlcChartModel;
 import org.primefaces.model.chart.OhlcChartSeries;
 import org.primefaces.model.chart.PieChartModel;
+
+import com.google.gson.Gson;
+
+import br.unitins.datanext.application.ApiGraphic;
+import br.unitins.datanext.models.GrainApi;
 
 
 @Named("adminHomeController")
@@ -191,46 +198,43 @@ public class AdminHomeController implements Serializable {
  
     private LineChartModel initCategoryModel() {
         LineChartModel model = new LineChartModel();
+
+        
+
  
-        ChartSeries boys = new ChartSeries();
-        boys.setLabel("Boys");
-        boys.set("2004", 120);
-        boys.set("2005", 100);
-        boys.set("2006", 44);
-        boys.set("2007", 150);
-        boys.set("2008", 25);
- 
-        ChartSeries girls = new ChartSeries();
-        girls.setLabel("Girls");
-        girls.set("2004", 52);
-        girls.set("2005", 60);
-        girls.set("2006", 110);
-        girls.set("2007", 90);
-        girls.set("2008", 120);
- 
-        model.addSeries(boys);
-        model.addSeries(girls);
+        ChartSeries corn = new ChartSeries();
+        corn.setLabel("Milho");
+        Gson gson = new Gson();
+        String output = ApiGraphic.connectionCorn();
+        GrainApi dados = gson.fromJson(new String(output.getBytes()), GrainApi.class);
+        for(int i = 15; i >= 0; i--) {
+        	corn.set(DateTimeFormatter.ofPattern("dd/MM/YYYY").format(LocalDate.parse(dados.getDataset().getData()[i][0])), Double.valueOf(dados.getDataset().getData()[i][1]));
+        }
+        model.addSeries(corn);
  
         return model;
     }
  
     private void createLineModels() {
         lineModel1 = initLinearModel();
-        lineModel1.setTitle("Arroz");
+        lineModel1.setTitle("Soja");
         lineModel1.setLegendPosition("e");
+        lineModel1.setShowPointLabels(true);
+        lineModel1.getAxes().put(AxisType.X, new CategoryAxis("Últimos 15 dias"));
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
+        yAxis.setLabel("Real");
         yAxis.setMin(0);
-        yAxis.setMax(10);
+        yAxis.setMax(40);
  
         lineModel2 = initCategoryModel();
-        lineModel2.setTitle("Feijão");
+        lineModel2.setTitle("Milho");
         lineModel2.setLegendPosition("e");
         lineModel2.setShowPointLabels(true);
-        lineModel2.getAxes().put(AxisType.X, new CategoryAxis("Years"));
+        lineModel2.getAxes().put(AxisType.X, new CategoryAxis("Últimos 15 dias"));
         yAxis = lineModel2.getAxis(AxisType.Y);
-        yAxis.setLabel("Births");
+        yAxis.setLabel("Real");
         yAxis.setMin(0);
-        yAxis.setMax(200);
+        yAxis.setMax(20);
  
         zoomModel = initLinearModel();
         zoomModel.setTitle("Zoom");
@@ -508,26 +512,16 @@ public class AdminHomeController implements Serializable {
     private LineChartModel initLinearModel() {
         LineChartModel model = new LineChartModel();
  
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Series 1");
- 
-        series1.set(1, 2);
-        series1.set(2, 1);
-        series1.set(3, 3);
-        series1.set(4, 6);
-        series1.set(5, 8);
- 
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Series 2");
- 
-        series2.set(1, 6);
-        series2.set(2, 3);
-        series2.set(3, 2);
-        series2.set(4, 7);
-        series2.set(5, 9);
- 
-        model.addSeries(series1);
-        model.addSeries(series2);
+        LineChartSeries soja = new LineChartSeries();
+        soja.setLabel("Soja");
+        Gson gson = new Gson();
+        String output = ApiGraphic.connectionSoy();
+        GrainApi dados = gson.fromJson(new String(output.getBytes()), GrainApi.class);
+        for(int i = 15; i >= 0; i--) {
+        	soja.set(DateTimeFormatter.ofPattern("dd/MM/YYYY").format(LocalDate.parse(dados.getDataset().getData()[i][0])), Double.valueOf(dados.getDataset().getData()[i][1]));
+        }
+       
+        model.addSeries(soja);
  
         return model;
     }

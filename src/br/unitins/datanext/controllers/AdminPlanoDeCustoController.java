@@ -3,12 +3,15 @@ package br.unitins.datanext.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+
+import org.primefaces.model.DualListModel;
 
 import br.unitins.datanext.application.JPAUtil;
 import br.unitins.datanext.application.RepositoryException;
@@ -26,25 +29,24 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 	private String filtro;
 	private List<PlanoDeCusto> listaPlanoDeCusto;
 	private List<PlanoDeCusto> listaDependente;
-//	private PlanoDeCusto aux;
-//	
-//	public PlanoDeCusto getAux() {
-//		if(aux == null)
-//			aux = new PlanoDeCusto();
-//		return aux;
-//	}
-//
-//	public void setAux(PlanoDeCusto aux) {
-//		this.aux = aux;
-//	}
+	private DualListModel<PlanoDeCusto> dependentes;
+
+
+	
+	@PostConstruct
+	public void init() {
+		
+		dependentes = new DualListModel<PlanoDeCusto>(getListaDependente(), getEntity().getDependentes());
+		getEntity().setDependentes(dependentes.getTarget());
+		
+	}
+
+
 
 	public AdminPlanoDeCustoController() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.keep("flashPlano");
 		entity = (PlanoDeCusto) flash.get("flashPlano");	
-//		if(entity != null) {
-//			setAux(entity.getDependentes().get(0));
-//		}
 
 	}
 	
@@ -64,7 +66,8 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 	@Override
 	public String salvar() {
 		Repository<PlanoDeCusto> repo = new Repository<PlanoDeCusto>();
-//		getEntity().getDependentes().add(getAux());
+		getEntity().setDependentes(dependentes.getTarget());
+		getEntity().getDependentes().get(0);
 		try {
 			repo.beginTransaction();
 			repo.save(getEntity());
@@ -157,6 +160,14 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 
 	public void setListaDependente(List<PlanoDeCusto> listaDependente) {
 		this.listaDependente = listaDependente;
+	}
+
+	public DualListModel<PlanoDeCusto> getDependentes() {
+		return dependentes;
+	}
+
+	public void setDependentes(DualListModel<PlanoDeCusto> dependentes) {
+		this.dependentes = dependentes;
 	}
 
 	public void pesquisar() {
