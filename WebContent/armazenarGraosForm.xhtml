@@ -7,8 +7,10 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<ui:define name="content">
-		<h:form>
-			<div class="row">
+		<div class="row">
+			<h:form>
+			<p:growl id="growl" sticky="false" life="800"/> 
+			
 				<div class="col-md-12">
 					<div class="card ">
 						<div class="card-header">
@@ -28,69 +30,101 @@
 
 							<div class="row">
 								<div class="col-md-4">
-									<label>Horário Armazenagem *</label> <input type="time"
-										class="form-control"></input>
+									<label>Horário Armazenagem *</label>
+									<p:datePicker style="width:100%" id="timeonly"
+										value="#{adminArmazenarGraoController.entity.horarioArmazenagem}"
+										timeOnly="true" pattern="HH:mm" />
 								</div>
 								<div class="col-md-4">
-									<label>Estado do Grão *</label> <input type="text"
-										class="form-control"></input>
+									<label>Estado do Grão *</label>
+									<p:selectOneMenu id="estado" style="width:100%"
+										value="#{adminArmazenarGraoController.entity.estadoDoGrao}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminArmazenarGraoController.listaEstadoDoGrao}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-4">
-									<label>Umidade Relativa do Ar *</label> <input type="text"
-										class="form-control"></input>
+									<label>Umidade Relativa do Ar *</label>
+									<p:inputNumber style="width:100%" symbol="%" symbolPosition="s"
+										emptyValue="always"
+										value="#{adminArmazenarGraoController.entity.umidadeRelativaDoAr}"></p:inputNumber>
+
 								</div>
 								<div class="col-md-4">
-									<label>Pressão de Vapor do ar *</label> <input type="text"
-										class="form-control"></input>
+									<label>Pressão de Vapor do Grao *</label>
+									<p:inputNumber style="width:100%" symbol="atm"
+										symbolPosition="s" emptyValue="always"
+										value="#{adminArmazenarGraoController.entity.pressaoVaporGrao}"></p:inputNumber>
+
 								</div>
 								<div class="col-md-4">
-									<label>Pressão de Vapor do ar *</label> <input type="text"
-										class="form-control"></input>
+									<label>Pressão de Vapor do ar *</label>
+									<p:inputNumber style="width:100%" symbol="atm"
+										symbolPosition="s" emptyValue="always"
+										value="#{adminArmazenarGraoController.entity.pressaoVaporAr}"></p:inputNumber>
+
 								</div>
 								<div class="col-md-4">
-									<label>Temperatura *</label> <input type="text"
-										class="form-control"></input>
+									<label>Temperatura *</label>
+									<p:inputNumber id="input1" style="width:100%" symbol="C°"
+										symbolPosition="s" emptyValue="always"
+										value="#{adminArmazenarGraoController.entity.temperatura}">
+									</p:inputNumber>
+
 								</div>
 
 								<div class="col-md-3">
-									<label>Armazem *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Armazem 1</option>
-										<option value="2">Armazem 2</option>
-									</select>
+									<label>Armazem *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminArmazenarGraoController.entity.armazem}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminArmazenarGraoController.listaArmazem}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.sigla}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-3">
-									<label>Grao *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Grao 1</option>
-										<option value="2">Grao 2</option>
-									</select>
+									<label>Grao *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminArmazenarGraoController.entity.grao}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminArmazenarGraoController.listaGrao}" var="obj"
+											itemValue="#{obj}" itemLabel="#{obj.nome}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-3">
-									<label>Motorista *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Motorista 1</option>
-										<option value="2">Motorista 2</option>
-									</select>
+									<label>Motorista *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminArmazenarGraoController.entity.motorista}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminArmazenarGraoController.listaMotorista}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.pessoa.nome}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-3">
-									<label>Agricultor *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Agricultor 1</option>
-										<option value="2">Agricultor 2</option>
-									</select>
+									<label>Agricultor *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminArmazenarGraoController.entity.agricultor}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminArmazenarGraoController.listaAgricultor}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.pessoa.nome}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-6">
-									<label>Endereço da chegada de grãos *</label> <input
-										type="text" class="form-control"></input>
+									<label>Endereço da chegada de grãos *</label>
+									<p:inputText style="width:100%"
+										value="#{adminArmazenarGraoController.entity.endereco.endereco}"></p:inputText>
 								</div>
 								<div class="col-md-6">
-									<label>Quantidade Armazenada *</label> <input type="text"
-										class="form-control"></input>
+									<label>Quantidade Armazenada *</label>
+									<p:inputNumber id="input2" style="width:100%"
+										value="#{adminArmazenarGraoController.entity.quantidadeArmazenada}">
+									</p:inputNumber>
 								</div>
 
 							</div>
@@ -98,51 +132,36 @@
 						<div class="card-footer py-4">
 							<nav class="d-flex justify-content-end" aria-label="..."></nav>
 						</div>
+						<div class="row">
+							<div class="col-12">
+								<p:commandButton class="btn btn-success float-right mt-4"
+									actionListener="#{adminArmazenarGraoController.init}"
+									process="@this estado"
+									update="fluxo growl"
+									value="Gerar FluxoGramas" />
+								<p:commandButton class="btn btn-success float-right mt-4"
+									action="#{adminArmazenarGraoController.salvar}"
+									value="Salvar" />
+							</div>
+						</div>
 					</div>
 				</div>
-
+			</h:form>
+			<h:form id="fluxo">
 				<div class="col-md-12">
 					<div class="card ">
 						<div class="card-header">
 							<div class="row">
 								<div class="col-12">
-									<h4 class="card-title">Pré condições e Custos</h4>
+									<h4 class="card-title">Fluxo de Armazenagem</h4>
 
 								</div>
 							</div>
 						</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-4">
-									<label>Condição de armazenagem *</label> <input type="text"
-										class="form-control" disabled="disabled"></input>
-								</div>
-								<div class="col-md-4">
-									<label>Etapas Armazenagem *</label> <input type="text"
-										class="form-control" disabled="disabled"></input>
-								</div>
-								<div class="col-md-4">
-									<label>Custo Armazenagem *</label> <input type="text"
-										class="form-control" disabled="disabled"></input>
-								</div>
 								<div class="col-12" style="margin-top: 20px">
-									<table class="table tablesorter table-striped" id="">
-										<thead class=" text-primary">
-											<th scope="col">Condição</th>
-											<th scope="col">Etapas</th>
-											<th scope="col">Custos</th>
-										</thead>
-										<tbody>
-											<tr>
-												<td colspan="20"
-													style="text-align: center; font-size: 1.1em;">Nenhuma
-													informação cadastrada.</td>
-											</tr>
-
-
-										</tbody>
-									</table>
-
+									<p:diagram value="#{adminArmazenarGraoController.model}" style="height:400px; width:1531px" styleClass="ui-widget-content" />
 								</div>
 							</div>
 						</div>
@@ -151,16 +170,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<p:commandButton  class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
-										value="Salvar" />
-				</div>
-			</div>
-
 		</h:form>
+		</div>
+
+
+
 	</ui:define>
 
 

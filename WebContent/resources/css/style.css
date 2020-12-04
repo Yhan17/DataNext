@@ -1,7 +1,8 @@
-.someStyleClass.ui-accordion .ui-accordion-header span.ui-icon  {
+.someStyleClass.ui-accordion .ui-accordion-header span.ui-icon {
 	margin-top: 2px;
-  	float: right;
+	float: right;
 }
+
 .layout-footer {
 	position: fixed;
 	bottom: 0;
@@ -11,43 +12,46 @@
 }
 
 label#thumbnail {
-    margin-bottom: 20px;
-    border: 1px dashed #ddd;
-    background-size: cover;
-    cursor: pointer;
-    display: flex;
-    height: 160px;
-    justify-content: center;
-    align-items: center;
+	margin-bottom: 20px;
+	border: 1px dashed #ddd;
+	background-size: cover;
+	cursor: pointer;
+	display: flex;
+	height: 160px;
+	justify-content: center;
+	align-items: center;
 }
 
 label#thumbnail input {
-    display: none;
+	display: none;
 }
 
 label#thumbnail.has-thumbnail {
-    border: 0;
+	border: 0;
 }
 
-label#thumbnail.has-thumbnail img{
-    display: none;
+label#thumbnail.has-thumbnail img {
+	display: none;
 }
-.city-id > input {
+
+.city-id>input {
 	width: 100%;
 }
 
-.ui-calendar > input {
-	width: 100%;
-}
-.capacidade > input {
+.ui-calendar>input {
 	width: 100%;
 }
 
-body .ui-picklist .ui-picklist-list  {
+.capacidade>input {
+	width: 100%;
+}
+
+body .ui-picklist .ui-picklist-list {
 	background-color: none !important;
 }
 
-ul.ui-widget-content.ui-picklist-list.ui-picklist-target.ui-corner-all.ui-sortable {
+ul.ui-widget-content.ui-picklist-list.ui-picklist-target.ui-corner-all.ui-sortable
+	{
 	float: right;
 }
 
@@ -58,4 +62,16 @@ ul.ui-widget-content.ui-picklist-list.ui-picklist-target.ui-corner-all.ui-sortab
 
 .customTopBar {
 	color: white;
+}
+
+.ui-inputnumber input {
+	width: 100%;
+}
+
+.ui-diagram-element {
+	border: 0.1em dotted #d4e06b;
+	width: 14em;
+	height: 4em;
+	line-height: 4em;
+	text-align: center;
 }

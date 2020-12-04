@@ -1,4 +1,4 @@
-CREATE FUNCTION public.inser_into_situacao()
+CREATE FUNCTION public.insert_into_situacao()
     RETURNS trigger
     LANGUAGE 'plpgsql'
      NOT LEAKPROOF
@@ -7,13 +7,13 @@ AS $BODY$ BEGIN
  return NEW;
  END$BODY$;
 
-ALTER FUNCTION public.inser_into_situacao()
-    OWNER TO topicos2;
 
+ALTER FUNCTION public.insert_into_situacao()
+    OWNER TO topicos2;
+    
 CREATE TRIGGER insert_into_situacao AFTER INSERT ON armazem
   FOR EACH ROW EXECUTE PROCEDURE insert_into_situacao();
-
-
+    
 CREATE FUNCTION public.update_situacao()
     RETURNS trigger
     LANGUAGE 'plpgsql'
@@ -23,21 +23,21 @@ DECLARE
 capacidade double precision;
 quantidadearmazenada double precision;
 results double precision;
-begin
+BEGIN
 	SELECT into capacidade armazem.capacidade from armazem where id = new.armazem_id;
 	SELECT into quantidadearmazenada situacao.quantidadearmazenada from situacao where armazem_id = new.armazem_id;
-	SELECT into results (quantidadearmazenada - new.quantidade);
+	SELECT into results quantidadearmazenada + new.quantidadearmazenada;
 	
-	if (quantidadearmazenada - new.quantidade) < 0 THEN
-		update situacao set quantidadearmazenada = 0, status = 1 where situacao.armazem_id = new.armazem_id;
+	if (results > capacidade) THEN
+		update situacao set quantidadearmazenada = capacidade,status=4 where situacao.armazem_id = new.armazem_id;
 	end if;
 	
-	if (quantidadearmazenada - new.quantidade) > 0 THEN
-		update situacao set quantidadearmazenada = results where armazem_id = new.armazem_id;
-		if (((capacidade - quantidadearmazenada)/capacidade) > 0.5 AND ((capacidade - quantidadearmazenada)/capacidade) < capacidade ) then
+	if (capacidade - quantidadearmazenada) > new.quantidadearmazenada THEN
+		update situacao set quantidadearmazenada = results where situacao.armazem_id = new.armazem_id;
+		if ((results/capacidade) > 0.5) then
 			update situacao set status = 3 where situacao.armazem_id = new.armazem_id;
 		end if;
-		if (((capacidade - quantidadearmazenada)/capacidade) < 0.5 AND ((capacidade - quantidadearmazenada)/capacidade) > 0 ) then
+		if ((results/capacidade)< 0.5)then
 			update situacao set status = 2 where situacao.armazem_id = new.armazem_id;
 		end if;
 	end if;
@@ -71,18 +71,18 @@ results double precision;
 begin
 	SELECT into capacidade armazem.capacidade from armazem where id = new.armazem_id;
 	SELECT into quantidadearmazenada situacao.quantidadearmazenada from situacao where armazem_id = new.armazem_id;
-	SELECT into results quantidadearmazenada + new.quantidadearmazenada;
+	SELECT into results (quantidadearmazenada - new.quantidade);
 	
-	if( capacidade - quantidadearmazenada ) < new.quantidadearmazenada THEN
-		update situacao set quantidadearmazenada = capacidade,status=4 where situacao.armazem_id = new.armazem_id;
+	if (results < 0) THEN
+		update situacao set quantidadearmazenada = 0, status = 1 where situacao.armazem_id = new.armazem_id;
 	end if;
 	
-	if (capacidade - quantidadearmazenada) > new.quantidadearmazenada THEN
-		update situacao set quantidadearmazenada = results where situacao.armazem_id = new.armazem_id;
-		if (((capacidade - quantidadearmazenada)/capacidade) > 0.5 AND ((capacidade - quantidadearmazenada)/capacidade) < capacidade ) then
+	if (results) > 0 THEN
+		update situacao set quantidadearmazenada = results where armazem_id = new.armazem_id;
+		if ((results/capacidade) > 0.5 )then
 			update situacao set status = 3 where situacao.armazem_id = new.armazem_id;
 		end if;
-		if (((capacidade - quantidadearmazenada)/capacidade) < 0.5 AND ((capacidade - quantidadearmazenada)/capacidade) > 0 )then
+		if ((results/capacidade) < 0.5 )then
 			update situacao set status = 2 where situacao.armazem_id = new.armazem_id;
 		end if;
 	end if;

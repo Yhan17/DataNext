@@ -29,52 +29,61 @@
 							<div class="row">
 
 								<div class="col-md-3">
-									<label>Armazem *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Armazem 1</option>
-										<option value="2">Armazem 2</option>
-									</select>
+									<label>Armazem *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminRetirarGraoController.entity.armazem}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaArmazem}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.sigla}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-3">
-									<label>Grao *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Grao 1</option>
-										<option value="2">Grao 2</option>
-									</select>
+									<label>Grao *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminRetirarGraoController.entity.grao}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaGrao}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-3">
-									<label>Motorista *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Motorista 1</option>
-										<option value="2">Motorista 2</option>
-									</select>
+									<label>Motorista *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminRetirarGraoController.entity.motorista}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaMotorista}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.pessoa.nome}" />
+									</p:selectOneMenu>
 								</div>
 								<div class="col-md-3">
-									<label>Agricultor *</label> <select name="specialties[]"
-										id="inp-specialties[]" class="form-control">
-										<option value="">Selecione...</option>
-										<option value="1">Agricultor 1</option>
-										<option value="2">Agricultor 2</option>
-									</select>
+									<label>Agricultor *</label>
+									<p:selectOneMenu style="width:100%"
+										value="#{adminRetirarGraoController.entity.agricultor}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaAgricultor}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.pessoa.nome}" />
+									</p:selectOneMenu>
 								</div>
-								<div class="col-md-12">
-									<h5 style="text-align: center; padding-top: 40px">Quantidade
-										de grãos no armazém: xx Unidade de Medida</h5>
+								
+								<div class="col-md-6">
+									<label>Endereço da chegada de grãos *</label>
+									<p:inputText style="width:100%"
+										value="#{adminRetirarGraoController.entity.endereco.endereco}"></p:inputText>
 								</div>
-								<div class="col-md-12">
-									<label>Quantidade a ser retirada *</label> <input type="text"
-										class="form-control" disabled="disabled"></input>
+								<div class="col-md-6">
+									<label>Quantidade a ser Retirada *</label>
+									<p:inputNumber id="input2" style="width:100%"
+										value="#{adminRetirarGraoController.entity.quantidade}">
+									</p:inputNumber>
 								</div>
+
 
 
 							</div>
 						</div>
 						<div class="card-footer py-4">
 													<p:commandButton class="btn btn-success float-right mt-4"
-										action="armazenarGraos.xhtml?faces-redirect=true"
+										action="#{adminRetirarGraoController.salvar}"
 										value="Salvar" />
 						</div>
 					</div>

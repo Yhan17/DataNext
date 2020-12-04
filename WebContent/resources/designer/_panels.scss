@@ -406,15 +406,15 @@ body {
     }
 
     .ui-fieldset {
-        border: $panelContentBorder;
-        background-color: $panelContentBgColor;
+        border: 1px dashed black;
+        background-color: none;
         color: $panelContentTextColor;
         padding: $panelContentPadding;
 
         .ui-fieldset-legend {
-            border: $panelHeaderBorder;
-            background-color: $panelHeaderBgColor;
-            color: $panelHeaderTextColor;
+            border: 1px solid black;
+            background-color: none;
+            color: #000;
             padding: $panelHeaderPadding;
             font-weight: $panelHeaderFontWeight;
 

@@ -2926,15 +2926,15 @@ body .ui-toolbar .ui-separator {
   margin-right: 0.429em;
 }
 body .ui-fieldset {
-  border: none;
-  background-color: #1b593c;
+  border: 1px dashed black;
+  background-color: none;
   color: #333333;
   padding: 0.571em 1em;
 }
 body .ui-fieldset .ui-fieldset-legend {
-  border: none;
-  background-color: #1b593c;
-  color: #ffffff;
+  border: 1px solid black;
+  background-color: none;
+  color: #000;
   padding: 0.571em 1em 0.571em 1em;
   font-weight: 700;
 }
@@ -4144,8 +4144,8 @@ body .ui-picklist .ui-picklist-filter-container .ui-icon:before {
   content: "";
 }
 body .ui-picklist .ui-picklist-list {
-  border: 1px solid black;
-  background-color: none;
+  border: none;
+  background-color: #1b593c;
   color: #333333;
   padding: 0;
 }

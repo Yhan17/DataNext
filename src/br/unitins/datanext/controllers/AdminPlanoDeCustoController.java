@@ -3,7 +3,6 @@ package br.unitins.datanext.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -11,7 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import org.primefaces.model.DualListModel;
+import org.primefaces.event.DragDropEvent;
 
 import br.unitins.datanext.application.JPAUtil;
 import br.unitins.datanext.application.RepositoryException;
@@ -29,19 +28,23 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 	private String filtro;
 	private List<PlanoDeCusto> listaPlanoDeCusto;
 	private List<PlanoDeCusto> listaDependente;
-	private DualListModel<PlanoDeCusto> dependentes;
+    private List<PlanoDeCusto> dependentesSelecionados;
 
 
 	
-	@PostConstruct
-	public void init() {
-		
-		dependentes = new DualListModel<PlanoDeCusto>(getListaDependente(), getEntity().getDependentes());
-		getEntity().setDependentes(dependentes.getTarget());
-		
+
+
+
+
+	public List<PlanoDeCusto> getDependentesSelecionados() {
+		if(dependentesSelecionados == null)
+			dependentesSelecionados = new ArrayList<PlanoDeCusto>();
+		return dependentesSelecionados;
 	}
 
-
+	public void setDependentesSelecionados(List<PlanoDeCusto> dependentesSelecionados) {
+		this.dependentesSelecionados = dependentesSelecionados;
+	}
 
 	public AdminPlanoDeCustoController() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -63,11 +66,19 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 		return entity;
 	}
 	
+	 public void onPlanDrop(DragDropEvent<PlanoDeCusto> ddEvent) {
+		 	PlanoDeCusto plano = ddEvent.getData();
+	  
+	        getDependentesSelecionados().add(plano);
+	        getListaDependente().remove(plano);
+	    }
+	
+	
 	@Override
 	public String salvar() {
 		Repository<PlanoDeCusto> repo = new Repository<PlanoDeCusto>();
-		getEntity().setDependentes(dependentes.getTarget());
-		getEntity().getDependentes().get(0);
+		if(!dependentesSelecionados.isEmpty())
+			getEntity().setDependentes(dependentesSelecionados);
 		try {
 			repo.beginTransaction();
 			repo.save(getEntity());
@@ -162,13 +173,6 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 		this.listaDependente = listaDependente;
 	}
 
-	public DualListModel<PlanoDeCusto> getDependentes() {
-		return dependentes;
-	}
-
-	public void setDependentes(DualListModel<PlanoDeCusto> dependentes) {
-		this.dependentes = dependentes;
-	}
 
 	public void pesquisar() {
 		EntityManager em = JPAUtil.getEntityManager();

@@ -1,6 +1,6 @@
 package br.unitins.datanext.models;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,11 +10,11 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
-	private Time horarioArmazenagem;
-	private String estadoDoGrao;
-	private String umidadeRelativaDoAr;
-	private String pressaoVaporGrao;
-	private String prassaoVaporAr;
+	private LocalTime horarioArmazenagem;
+	private EstadoDoGrao estadoDoGrao;
+	private Double umidadeRelativaDoAr;
+	private Double pressaoVaporGrao;
+	private Double pressaoVaporAr;
 	private Double temperatura;
 	private String condicaoArmazenagem;
 	private String etapaArmazenamento;
@@ -31,44 +31,44 @@ public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
 	@JoinColumn(unique = true)
 	private Endereco endereco;
 
-	public Time getHorarioArmazenagem() {
+	public LocalTime getHorarioArmazenagem() {
 		return horarioArmazenagem;
 	}
 
-	public void setHorarioArmazenagem(Time horarioArmazenagem) {
+	public void setHorarioArmazenagem(LocalTime horarioArmazenagem) {
 		this.horarioArmazenagem = horarioArmazenagem;
 	}
 
-	public String getEstadoDoGrao() {
+	public EstadoDoGrao getEstadoDoGrao() {
 		return estadoDoGrao;
 	}
 
-	public void setEstadoDoGrao(String estadoDoGrao) {
+	public void setEstadoDoGrao(EstadoDoGrao estadoDoGrao) {
 		this.estadoDoGrao = estadoDoGrao;
 	}
 
-	public String getUmidadeRelativaDoAr() {
+	public Double getUmidadeRelativaDoAr() {
 		return umidadeRelativaDoAr;
 	}
 
-	public void setUmidadeRelativaDoAr(String umidadeRelativaDoAr) {
+	public void setUmidadeRelativaDoAr(Double umidadeRelativaDoAr) {
 		this.umidadeRelativaDoAr = umidadeRelativaDoAr;
 	}
 
-	public String getPressaoVaporGrao() {
+	public Double getPressaoVaporGrao() {
 		return pressaoVaporGrao;
 	}
 
-	public void setPressaoVaporGrao(String pressaoVaporGrao) {
+	public void setPressaoVaporGrao(Double pressaoVaporGrao) {
 		this.pressaoVaporGrao = pressaoVaporGrao;
 	}
 
-	public String getPrassaoVaporAr() {
-		return prassaoVaporAr;
+	public Double getPressaoVaporAr() {
+		return pressaoVaporAr;
 	}
 
-	public void setPrassaoVaporAr(String prassaoVaporAr) {
-		this.prassaoVaporAr = prassaoVaporAr;
+	public void setPressaoVaporAr(Double pressaoVaporAr) {
+		this.pressaoVaporAr = pressaoVaporAr;
 	}
 
 	public Double getTemperatura() {

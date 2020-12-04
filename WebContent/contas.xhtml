@@ -76,8 +76,8 @@
 							    			<p:outputLabel value="#{obj.obrigatorio}" />
 							    		</p:column>
 							    		<p:column>
-							    			<f:facet name="header">Dependente</f:facet>
-							    			<p:outputLabel value="#{obj.dependentes[0].descricao} " />
+							    			<f:facet name="header">Numero de Dependentes</f:facet>
+							    			<p:outputLabel value="#{empty obj.dependentes ? 'Sem dependentes' : obj.dependentes.size()} " />
 							    		</p:column>
 							    		<p:column>
 							    			<f:facet name="header">Editar</f:facet>

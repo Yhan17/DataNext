@@ -1,7 +1,10 @@
 package br.unitins.datanext.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 
@@ -15,7 +18,8 @@ public class RetirarGrao extends DefaultEntity<RetirarGrao> {
 	private Armazem armazem;
 	@ManyToOne
 	private Agricultor agricultor;
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true)
 	private Endereco endereco;
 
 	public Double getQuantidade() {

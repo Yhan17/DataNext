@@ -59,4 +59,27 @@ public class ArmazemRepository extends Repository<Armazem>{
 		}
 		
 	}
+	
+	public List<Armazem> findLocation() throws RepositoryException {
+		
+			try {
+				EntityManager em = JPAUtil.getEntityManager();
+				StringBuffer sql = new StringBuffer();
+				sql.append("SELECT ");
+				sql.append("  a.sigla,a.localizacao.latitude,a.localizacao.longitude ");
+				sql.append("FROM ");
+				sql.append("  Armazem a ");
+				sql.append("  ORDER BY a.id ");
+
+				Query query = em.createNativeQuery(sql.toString());
+
+				return query.getResultList();
+			} catch (Exception e) {
+				System.out.println("Erro ao realizar uma consulta ao banco.");
+				e.printStackTrace();
+				throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+			}
+
+		
+	}
 }
