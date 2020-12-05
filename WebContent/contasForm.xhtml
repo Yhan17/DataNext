@@ -8,6 +8,8 @@
 
 	<ui:define name="content">
 		<h:form>
+			<p:growl id="growl" globalOnly="false" />
+
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card ">
@@ -77,104 +79,28 @@
 								</div>
 								<div class="col-md-12"
 									style="display: #{empty adminPlanoDeCustoController.listaDependente ? 'none' : ''}">
-
-
-									<label>Plano de Custo</label>
-
-									<p:fieldset id="availablePlano" legend="Planos Disponíveis">
-										<p:dataTable id="availablePlanoTable" var="obj"
-											value="#{adminPlanoDeCustoController.listaDependente}">
-											<p:column style="width:20px">
-												<h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
-												<p:draggable for="dragIcon" revert="true" helper="clone" />
-											</p:column>
-
-											<p:column headerText="Id">
-												<h:outputText value="#{obj.id}" />
-											</p:column>
-
-											<p:column headerText="Descrição">
-												<h:outputText value="#{obj.descricao}" />
-											</p:column>
-
-											<p:column headerText="Data">
-												<h:outputText value="#{obj.dataContabilidade}">
-													<f:convertDateTime pattern="dd-MM-yyyy" type="date" />
-												</h:outputText>
-											</p:column>
-
-											<p:column headerText="Preço">
-												<h:outputText value="#{obj.preco}">
-													<f:convertNumber locale="pt_BR" currencySymbol="R$"
-														type="currency" />
-												</h:outputText>
-											</p:column>
-										</p:dataTable>
-									</p:fieldset>
-
-									<p:fieldset id="selectPlan"
-										legend="Selecione o Plano de Custo" style="margin-top:20px">
-										<p:outputPanel id="dropPlan">
-											<h:outputText value="!!!Arraste para cá!!!"
-												rendered="#{empty adminPlanoDeCustoController.dependentesSelecionados}"
-												style="font-size:24px;" />
-											<p:dataTable id="selectedCarsTable" var="obj"
-												value="#{adminPlanoDeCustoController.dependentesSelecionados}"
-												rendered="#{not empty adminPlanoDeCustoController.dependentesSelecionados}">
-												<p:column style="width:20px">
-													<h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
-													<p:draggable for="dragIcon" revert="true" helper="clone" />
-												</p:column>
-
-												<p:column headerText="Id">
-													<h:outputText value="#{obj.id}" />
-												</p:column>
-
-												<p:column headerText="Descrição">
-													<h:outputText value="#{obj.descricao}" />
-												</p:column>
-
-												<p:column headerText="Data">
-													<h:outputText value="#{obj.dataContabilidade}">
-														<f:convertDateTime pattern="dd-MM-yyyy" type="date" />
-													</h:outputText>
-												</p:column>
-
-												<p:column headerText="Preço">
-													<h:outputText value="#{obj.preco}">
-														<f:convertNumber locale="pt_BR" currencySymbol="R$"
-															type="currency" />
-													</h:outputText>
-												</p:column>
-
-											</p:dataTable>
-										</p:outputPanel>
-									</p:fieldset>
-									<p:droppable for="selectPlan" tolerance="touch"
-										activeStyleClass="ui-state-highlight"
-										datasource="availablePlanoTable" onDrop="handleDrop">
-										<p:ajax listener="#{adminPlanoDeCustoController.onPlanDrop}"
-											update="dropPlan availablePlanoTable" />
-									</p:droppable>
+									<p:commandButton update="@none" process="@this"
+										actionListener="#{adminPlanoDeCustoController.abrirPlanoListing}"
+										disabled="#{!adminPlanoDeCustoController.entity.dependentes.isEmpty()}"
+										value="Selecionar Dependentes" style="width: 100%">
+										<p:ajax event="dialogReturn"
+											listener="#{adminPlanoDeCustoController.obterPlanoListing}"
+											update="@form quantidade" />
+									</p:commandButton>
+								<p:outputLabel id="quantidade" style="text-align:center" value="Dependentes Selecionados: #{!adminPlanoDeCustoController.entity.dependentes.isEmpty() ? adminPlanoDeCustoController.entity.dependentes.size() : 0}"></p:outputLabel>
 								</div>
 							</div>
 						</div>
 						<div class="card-footer py-4">
 							<p:commandButton class="btn btn-success float-right mt-4"
-								action="#{adminPlanoDeCustoController.salvar}" value="Salvar" />
+							 action="#{adminPlanoDeCustoController.salvar}" value="Salvar" />
 						</div>
 					</div>
 				</div>
 			</div>
 
 		</h:form>
-		<script type="text/javascript">
-			function handleDrop(event, ui) {
-				var droppedCar = ui.draggable;
 
-				droppedCar.fadeOut('fast');
-			}
-		</script>
 	</ui:define>
 
 

@@ -11,10 +11,12 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 import org.primefaces.event.DragDropEvent;
+import org.primefaces.event.SelectEvent;
 
 import br.unitins.datanext.application.JPAUtil;
 import br.unitins.datanext.application.RepositoryException;
 import br.unitins.datanext.application.Util;
+import br.unitins.datanext.controllers.listing.PlanoContasListing;
 import br.unitins.datanext.models.PlanoDeCusto;
 import br.unitins.datanext.models.TipoConta;
 import br.unitins.datanext.repository.PlanoDeCustoRepository;
@@ -77,8 +79,7 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 	@Override
 	public String salvar() {
 		Repository<PlanoDeCusto> repo = new Repository<PlanoDeCusto>();
-		if(!dependentesSelecionados.isEmpty())
-			getEntity().setDependentes(dependentesSelecionados);
+
 		try {
 			repo.beginTransaction();
 			repo.save(getEntity());
@@ -178,11 +179,33 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 		EntityManager em = JPAUtil.getEntityManager();
 		PlanoDeCustoRepository repo = new PlanoDeCustoRepository();
 		try {
-			setListaPlanoDeCusto(repo.findByMarca(getFiltro()));
+			setListaPlanoDeCusto(repo.findByDesc(getFiltro()));
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 			Util.addErrorMessage("Problema ao excluir.");
 			setListaPlanoDeCusto(null);
+		}
+	}
+	
+	public void abrirPlanoListing() {
+		PlanoContasListing listing = new PlanoContasListing();
+		listing.open();
+	}
+	
+	public void obterPlanoListing(SelectEvent<PlanoDeCusto> event) {
+		try {
+			getEntity().getDependentes().add(event.getObject());
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
+			Util.addInfoMessage("Dependente Adicionado com sucesso");
+			
+		}catch(Exception e) {
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
+			Util.addErrorMessage("Problema ao adicionar dependente.");
+
 		}
 	}
 

@@ -7,7 +7,6 @@ import javax.persistence.Query;
 
 import br.unitins.datanext.application.JPAUtil;
 import br.unitins.datanext.application.RepositoryException;
-import br.unitins.datanext.models.MarcaVentilacao;
 import br.unitins.datanext.models.PlanoDeCusto;
 
 public class PlanoDeCustoRepository extends Repository<PlanoDeCusto> {
@@ -36,7 +35,7 @@ public class PlanoDeCustoRepository extends Repository<PlanoDeCusto> {
 		
 	}
 	
-	public List<PlanoDeCusto> findByMarca(String plano) throws RepositoryException{ 
+	public List<PlanoDeCusto> findByDesc(String plano) throws RepositoryException{ 
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
 			StringBuffer jpql = new StringBuffer();
@@ -45,11 +44,11 @@ public class PlanoDeCustoRepository extends Repository<PlanoDeCusto> {
 			jpql.append("FROM ");
 			jpql.append("  PlanoDeCusto p ");
 			jpql.append("WHERE ");
-			jpql.append("  UPPER(p.desc) like UPPER(:desc) ");
-			jpql.append("ORDER BY p.desc ");
+			jpql.append("  UPPER(p.descricao) like UPPER(:desc) ");
+			jpql.append("ORDER BY p.descricao ");
 			
 			Query query = em.createQuery(jpql.toString());
-			query.setParameter("marca", "%"+ plano + "%");
+			query.setParameter("desc", "%"+ plano + "%");
 			
 			return query.getResultList();
 		} catch (Exception e) {
@@ -59,4 +58,5 @@ public class PlanoDeCustoRepository extends Repository<PlanoDeCusto> {
 		}
 		
 	}
+
 }
