@@ -1,5 +1,7 @@
 package br.unitins.datanext.application;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -25,5 +27,15 @@ public class Util {
 
 	public static void addInfoMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+	}
+
+	public static void redirect(String page) {
+		try {
+			FacesContext.getCurrentInstance()
+				.getExternalContext().redirect(page);
+		} catch (IOException e) {
+			e.printStackTrace();
+			addErrorMessage("Problemas ao redirecionar a página.");
+		}
 	}
 }

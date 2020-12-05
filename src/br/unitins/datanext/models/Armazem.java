@@ -76,4 +76,11 @@ public class Armazem extends DefaultEntity<Armazem> {
 		this.ventilacao = ventilacao;
 	}
 
+	@Override
+	public String toString() {
+		return "Armazem [descricao=" + descricao + ", sigla=" + sigla + ", status=" + status + ", capacidade="
+				+ capacidade + ", imagem=" + imagem + ", localizacao=" + localizacao + ", ventilacao=" + ventilacao
+				+ "]";
+	}
+	
 }

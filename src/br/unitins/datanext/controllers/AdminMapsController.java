@@ -26,7 +26,7 @@ public class AdminMapsController implements Serializable{
 	
 	
 	private MapModel maps;
-	public List<Armazem> armazem;
+	private List<Object[]> armazem;
 	  
     @PostConstruct
     public void init() {
@@ -43,7 +43,12 @@ public class AdminMapsController implements Serializable{
         //Basic marker
     	if(!getArmazem().isEmpty()) {
     		for (int i = 0; i < getArmazem().size(); i++) {
-    			maps.addOverlay(new Marker(new LatLng(Double.valueOf(getArmazem().get(i).getLocalizacao().getLatitude()),Double.valueOf(getArmazem().get(i).getLocalizacao().getLongitude())), getArmazem().get(i).getSigla()));
+    			System.out.println(getArmazem().get(i)[0]);
+    			System.out.println(getArmazem().get(i)[1]);
+    			System.out.println(getArmazem().get(i)[2]);
+    	        LatLng coord = new LatLng(Double.parseDouble((String) getArmazem().get(i)[1]),Double.parseDouble((String) getArmazem().get(i)[2]));
+    			maps.addOverlay(new Marker(coord, (String) getArmazem().get(i)[0]));
+    			coord = null;
 				
 			}
     		
@@ -53,20 +58,20 @@ public class AdminMapsController implements Serializable{
 //        maps.addOverlay(new Marker(coord4, "Kaleici"));
     }
   
-    public List<Armazem> getArmazem() {
+    public List<Object[]> getArmazem() {
     	if(armazem == null) {
     		ArmazemRepository repo = new ArmazemRepository();
     		try {
     			setArmazem(repo.findLocation());
 			} catch (RepositoryException e) {
 				e.printStackTrace();
-				setArmazem(new ArrayList<Armazem>());
+				setArmazem(new ArrayList<Object[]>());
 			}
     	}
 		return armazem;
 	}
 
-	public void setArmazem(List<Armazem> armazem) {
+	public void setArmazem(List<Object[]> armazem) {
 		this.armazem = armazem;
 	}
 

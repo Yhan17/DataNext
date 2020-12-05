@@ -55,77 +55,105 @@ public class AdminArmazenarGraoController extends Controller<ArmazenarGrao> {
 		}
 		return entity;
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		model = new DefaultDiagramModel();
 		model.setMaxConnections(-1);
 		model.setConnectionsDetachable(false);
 
-		
-		if(getEntity().getEstadoDoGrao() != null) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("FluxoGrama Gerado"));
-			Element elementA = new Element("Produto Úmido e Limpo", "20em", "6em");
-			elementA.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
-			elementA.setDraggable(false);
-			Element elementB = new Element("Produto Seco e Sujo", "20em", "6em");
-			elementB.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
-			elementB.setDraggable(false);
-			Element elementC = new Element("Produto Úmido e Sujo", "20em", "6em");
-			elementC.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
-			elementC.setDraggable(false);
+		if (getEntity().getEstadoDoGrao() != null) {
+			if (getEntity().getUmidadeRelativaDoAr() == null && getEntity().getTemperatura() == null
+					&& getEntity().getPressaoVaporAr() == null && getEntity().getPressaoVaporGrao() == null) {
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				Util.addErrorMessage("Preencha todos os campos para gerar o fluxograma");
+			} else {
+//				Campos Automáticos
+//				Tipo Atmazenagem
+				if (getEntity().getUmidadeRelativaDoAr() + getEntity().getTemperatura() < 55.5) {
+					getEntity().setCondicaoArmazenagem("ARMAZENAMENTO SEGURO");
+				} else {
+					getEntity().setCondicaoArmazenagem("RISCO DE ARMAZENAGEM");
+				}
+//				Situação Atual ou necessidade do Grão
+				if (getEntity().getPressaoVaporGrao() > getEntity().getPressaoVaporAr()) {
+					getEntity().setSituacaoGrao("SECAGEM *");
+				} else if (getEntity().getPressaoVaporGrao() < getEntity().getPressaoVaporAr()) {
+					getEntity().setSituacaoGrao("UMEDECIMENTO *");
+				} else {
+					getEntity().setSituacaoGrao("EQUILÍBRIO HIGROSCÓPICO *");
+				}
+//				Geração FluxoGrama
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("FluxoGrama Gerado"));
+				Element elementA = new Element("Produto Úmido e Limpo", "20em", "6em");
+				elementA.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
+				elementA.setDraggable(false);
+				Element elementB = new Element("Produto Seco e Sujo", "20em", "6em");
+				elementB.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
+				elementB.setDraggable(false);
+				Element elementC = new Element("Produto Úmido e Sujo", "20em", "6em");
+				elementC.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
+				elementC.setDraggable(false);
 
-			Element elementD = new Element("Produto Seco e Limpo", "20em", "6em");
-			elementD.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
-			elementD.setDraggable(false);
+				Element elementD = new Element("Produto Seco e Limpo", "20em", "6em");
+				elementD.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
+				elementD.setDraggable(false);
 
-			Element elementE = new Element("Pré-Limpeza", "40em", "12em");
-			elementE.addEndPoint(new DotEndPoint(EndPointAnchor.LEFT));
-			elementE.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
-			elementE.setDraggable(false);
+				Element elementE = new Element("Pré-Limpeza", "40em", "12em");
+				elementE.addEndPoint(new DotEndPoint(EndPointAnchor.LEFT));
+				elementE.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
+				elementE.setDraggable(false);
 
-			Element elementF = new Element("Secador", "60em", "12em");
-			elementF.addEndPoint(new DotEndPoint(EndPointAnchor.LEFT));
-			elementF.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
-			elementF.setDraggable(false);
+				Element elementF = new Element("Secador", "60em", "12em");
+				elementF.addEndPoint(new DotEndPoint(EndPointAnchor.LEFT));
+				elementF.addEndPoint(new DotEndPoint(EndPointAnchor.RIGHT));
+				elementF.setDraggable(false);
 
-			Element elementG = new Element("Armazenagem", "80em", "6em");
-			elementG.addEndPoint(new DotEndPoint(EndPointAnchor.LEFT));
-			elementG.setDraggable(false);
+				Element elementG = new Element("Armazenagem", "80em", "6em");
+				elementG.addEndPoint(new DotEndPoint(EndPointAnchor.LEFT));
+				elementG.setDraggable(false);
 
-			if (getEntity().getEstadoDoGrao().getLabel().equals("Umido e Limpo")) {
-				model.addElement(elementA);
-				model.addElement(elementF);
-				model.addElement(elementG);
-				model.connect(new Connection(elementA.getEndPoints().get(0), elementF.getEndPoints().get(0)));
-				model.connect(new Connection(elementF.getEndPoints().get(1), elementG.getEndPoints().get(0)));
-			}
-			
-			if (getEntity().getEstadoDoGrao().getLabel().equals("Seco e Sujo")) {
-				model.addElement(elementB);
-				model.addElement(elementE);
-				model.addElement(elementG);
-				
-				model.connect(new Connection(elementB.getEndPoints().get(0), elementE.getEndPoints().get(0)));
-				model.connect(new Connection(elementE.getEndPoints().get(1), elementG.getEndPoints().get(0)));
-			}
-			
-			if (getEntity().getEstadoDoGrao().getLabel().equals("Umido e Sujo")) {
-				model.addElement(elementC);
-				model.addElement(elementE);
-				model.addElement(elementF);
-				model.addElement(elementG);
-				
-				model.connect(new Connection(elementC.getEndPoints().get(0), elementE.getEndPoints().get(0)));
-				model.connect(new Connection(elementE.getEndPoints().get(1), elementF.getEndPoints().get(0)));
-				model.connect(new Connection(elementF.getEndPoints().get(1), elementG.getEndPoints().get(0)));
-			}
-			if (getEntity().getEstadoDoGrao().getLabel().equals("Seco e Limpo")) {
-				model.addElement(elementD);
-				model.addElement(elementG);
-				
-				model.connect(new Connection(elementD.getEndPoints().get(0), elementG.getEndPoints().get(0)));
-				
+				if (getEntity().getEstadoDoGrao().getLabel().equals("Umido e Limpo")) {
+					model.addElement(elementA);
+					model.addElement(elementF);
+					model.addElement(elementG);
+					model.connect(new Connection(elementA.getEndPoints().get(0), elementF.getEndPoints().get(0)));
+					model.connect(new Connection(elementF.getEndPoints().get(1), elementG.getEndPoints().get(0)));
+					getEntity().setEtapaArmazenamento("Secador -> Armazenagem");
+				}
+
+				if (getEntity().getEstadoDoGrao().getLabel().equals("Seco e Sujo")) {
+					model.addElement(elementB);
+					model.addElement(elementE);
+					model.addElement(elementG);
+
+					model.connect(new Connection(elementB.getEndPoints().get(0), elementE.getEndPoints().get(0)));
+					model.connect(new Connection(elementE.getEndPoints().get(1), elementG.getEndPoints().get(0)));
+					getEntity().setEtapaArmazenamento("Pré-Limpeza -> Armazenagem");
+
+				}
+
+				if (getEntity().getEstadoDoGrao().getLabel().equals("Umido e Sujo")) {
+					model.addElement(elementC);
+					model.addElement(elementE);
+					model.addElement(elementF);
+					model.addElement(elementG);
+
+					model.connect(new Connection(elementC.getEndPoints().get(0), elementE.getEndPoints().get(0)));
+					model.connect(new Connection(elementE.getEndPoints().get(1), elementF.getEndPoints().get(0)));
+					model.connect(new Connection(elementF.getEndPoints().get(1), elementG.getEndPoints().get(0)));
+					getEntity().setEtapaArmazenamento("Pré-Limpeza -> Secador -> Armazenagem");
+
+				}
+				if (getEntity().getEstadoDoGrao().getLabel().equals("Seco e Limpo")) {
+					model.addElement(elementD);
+					model.addElement(elementG);
+
+					model.connect(new Connection(elementD.getEndPoints().get(0), elementG.getEndPoints().get(0)));
+					getEntity().setEtapaArmazenamento("Armazenagem");
+
+				}
+
 			}
 		}
 
@@ -244,6 +272,7 @@ public class AdminArmazenarGraoController extends Controller<ArmazenarGrao> {
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 			Util.addErrorMessage("Erro ao Salvar.");
 		}
 
@@ -251,4 +280,8 @@ public class AdminArmazenarGraoController extends Controller<ArmazenarGrao> {
 		return "armazenarGraos.xhtml?faces-redirect=true";
 	}
 
+	public void generateRelatorio(ArmazenarGrao obj) {
+		Util.redirect("/DataNext/armazenarreport?ID_ARMAZENAGEM=" + obj.getId());
+
+	}
 }

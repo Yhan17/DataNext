@@ -1,6 +1,5 @@
 package br.unitins.datanext.controllers;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-
 
 import br.unitins.datanext.application.JPAUtil;
 import br.unitins.datanext.application.RepositoryException;
@@ -38,14 +36,14 @@ public class AdminUsuarioController extends Controller<Usuario> {
 	public AdminUsuarioController() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.keep("flashUsuario");
-		entity = (Usuario) flash.get("flashUsuario");	
+		entity = (Usuario) flash.get("flashUsuario");
 	}
-	
+
 	@Override
 	public Usuario getEntity() {
 		if (entity == null) {
 			entity = new Usuario();
-			
+
 			entity.setPessoa(new Pessoa());
 			entity.getPessoa().setCidade(new Cidade());
 			entity.getPessoa().getCidade().setEstado(new Estado());
@@ -54,7 +52,7 @@ public class AdminUsuarioController extends Controller<Usuario> {
 	}
 
 	public List<Usuario> getListaUsuario() {
-		if(listaUsuario == null) {
+		if (listaUsuario == null) {
 			listaUsuario = new ArrayList<Usuario>();
 			EntityManager em = JPAUtil.getEntityManager();
 			UsuarioRepository repo = new UsuarioRepository();
@@ -72,36 +70,38 @@ public class AdminUsuarioController extends Controller<Usuario> {
 	public void setListaUsuario(List<Usuario> listaMotorista) {
 		this.listaUsuario = listaMotorista;
 	}
-	
+
 	@Override
 	public String salvar() {
 		Repository<Usuario> repo = new Repository<Usuario>();
-		if(getEntity().getSenha() != null)
+		if (getEntity().getSenha() != null)
 			getEntity().setSenha(Util.hashSHA256(getEntity().getSenha()));
 		try {
 			repo.beginTransaction();
 			repo.save(getEntity());
 			repo.commitTransaction();
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage("Inserção Realizada com Sucesso!"));
-					
-					
-					FacesContext.getCurrentInstance()
-						    .getExternalContext()
-						    .getFlash().setKeepMessages(true);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Inserção Realizada com Sucesso!"));
+
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 //			Util.addInfoMessage("Operação realizada com sucesso.");
 			return "usuario.xhtml?faces-redirect=true";
 		} catch (RepositoryException e) {
 			repo.rollbackTransaction();
-			System.out.println("Erro ao salvar.");
-			e.printStackTrace();
-			Util.addErrorMessage("Erro ao Salvar.");
+			System.out.println(e.getMessage());
+			String duplicate = "duplicate key";
+			if (e.getMessage().toLowerCase().contains(duplicate.toLowerCase())) {
+				Util.addErrorMessage("Email já existe no sistema");
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+			} else {
+				Util.addErrorMessage("Erro ao Salvar.");
+
+			}
 		}
-		
+
 		limpar();
 		return "usuarioForm.xhtml?faces-redirect=true";
 	}
-	
+
 	@Override
 	public String editar(Usuario entity) {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -109,8 +109,7 @@ public class AdminUsuarioController extends Controller<Usuario> {
 		flash.put("flashUsuario", entity);
 		return "usuarioForm.xhtml?faces-redirect=true";
 	}
-	
-	
+
 	@Override
 	public void excluir(Usuario obj) {
 		super.excluir(obj);
@@ -123,9 +122,9 @@ public class AdminUsuarioController extends Controller<Usuario> {
 			Util.addErrorMessage("Problema ao excluir.");
 			setListaUsuario(null);
 		}
-		
+
 	}
-	
+
 	public List<Cidade> completeCidade(String query) {
 		CidadeRepository repo = new CidadeRepository();
 		try {

@@ -47,28 +47,28 @@
 								</div>
 								<div class="col-md-4">
 									<label>Umidade Relativa do Ar *</label>
-									<p:inputNumber style="width:100%" symbol="%" symbolPosition="s"
+									<p:inputNumber style="width:100%" id="itUmidadeRelativa" symbol="%" symbolPosition="s"
 										emptyValue="always"
 										value="#{adminArmazenarGraoController.entity.umidadeRelativaDoAr}"></p:inputNumber>
 
 								</div>
 								<div class="col-md-4">
 									<label>Pressão de Vapor do Grao *</label>
-									<p:inputNumber style="width:100%" symbol="atm"
+									<p:inputNumber style="width:100%" id="itPressaoGrao" symbol="atm"
 										symbolPosition="s" emptyValue="always"
 										value="#{adminArmazenarGraoController.entity.pressaoVaporGrao}"></p:inputNumber>
 
 								</div>
 								<div class="col-md-4">
 									<label>Pressão de Vapor do ar *</label>
-									<p:inputNumber style="width:100%" symbol="atm"
+									<p:inputNumber style="width:100%" id="itPressaoAr" symbol="atm"
 										symbolPosition="s" emptyValue="always"
 										value="#{adminArmazenarGraoController.entity.pressaoVaporAr}"></p:inputNumber>
 
 								</div>
 								<div class="col-md-4">
 									<label>Temperatura *</label>
-									<p:inputNumber id="input1" style="width:100%" symbol="C°"
+									<p:inputNumber id="input1"  style="width:100%" symbol="C°"
 										symbolPosition="s" emptyValue="always"
 										value="#{adminArmazenarGraoController.entity.temperatura}">
 									</p:inputNumber>
@@ -134,14 +134,15 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
+								<p:commandButton id="saveButtom" class="btn btn-success float-right mt-4"
+									action="#{adminArmazenarGraoController.salvar}"
+									disabled="#{adminArmazenarGraoController.entity.estadoDoGrao == null}"
+									value="Salvar" />
 								<p:commandButton class="btn btn-success float-right mt-4"
 									actionListener="#{adminArmazenarGraoController.init}"
-									process="@this estado"
-									update="fluxo growl"
+									process="@this estado itUmidadeRelativa input1 itPressaoAr itPressaoGrao"
+									update="fluxo growl saveButtom"
 									value="Gerar FluxoGramas" />
-								<p:commandButton class="btn btn-success float-right mt-4"
-									action="#{adminArmazenarGraoController.salvar}"
-									value="Salvar" />
 							</div>
 						</div>
 					</div>
@@ -162,6 +163,14 @@
 							<div class="row">
 								<div class="col-12" style="margin-top: 20px">
 									<p:diagram value="#{adminArmazenarGraoController.model}" style="height:400px; width:1531px" styleClass="ui-widget-content" />
+								</div>
+								<div class="col-6">
+									<h3>Condição Armazenagem:</h3>
+									<p:outputLabel value="#{adminArmazenarGraoController.entity.condicaoArmazenagem}"></p:outputLabel>
+								</div>
+								<div class="col-6">
+									<h3>Situação Atual ou necessidade do Grão:</h3>
+									<p:outputLabel value="#{adminArmazenarGraoController.entity.situacaoGrao}"></p:outputLabel>
 								</div>
 							</div>
 						</div>

@@ -72,9 +72,7 @@
 							    		</p:column>
 							    		<p:column>
 							    			<f:facet name="header">Relatório</f:facet>
-							    			<p:commandButton value="Relatório" style="width: 100%" action="#{adminArmazenarGraoController.excluir(obj)}" 
-							    			process="@this"
-							    			update="@form"
+							    			<p:commandButton value="Relatório" style="width: 100%" action="#{adminArmazenarGraoController.generateRelatorio(obj)}" 
 							    			></p:commandButton>
 							    		</p:column>
 							    		

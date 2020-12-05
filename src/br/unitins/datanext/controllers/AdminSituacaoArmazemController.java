@@ -40,5 +40,10 @@ public class AdminSituacaoArmazemController implements Serializable {
 	public void setListaSituacao(List<Situacao> listaSituacao) {
 		this.listaSituacao = listaSituacao;
 	}
+	
+	public void generateRelatorio() {
+		Util.redirect("/DataNext/armazemreport");
+
+	}
 
 }

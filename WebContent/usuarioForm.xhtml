@@ -8,6 +8,7 @@
 
 	<ui:define name="content">
 		<h:form>
+			<p:growl id="growl" sticky="false" life="800" />
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card ">
@@ -68,12 +69,16 @@
 								</div>
 								<div class="col-md-6">
 									<label>Senha *</label>
-									<p:password id="pwd1" styleClass="form-control" value="#{adminUsuarioController.entity.senha}" match="pwd2" feedback="true" required="true" />
+									<p:password id="pwd1" styleClass="form-control"
+										value="#{adminUsuarioController.entity.senha}" match="pwd2"
+										feedback="true" required="true" />
 								</div>
 								<div class="col-md-6">
 									<label>Confirmar Senha *</label>
-									<p:password id="pwd2" styleClass="form-control" value="#{adminUsuarioController.entity.senha}" feedback="true" required="true" />
-									
+									<p:password id="pwd2" styleClass="form-control"
+										value="#{adminUsuarioController.entity.senha}" feedback="true"
+										required="true" />
+
 								</div>
 
 							</div>
@@ -81,8 +86,7 @@
 						<div class="card-footer py-4">
 
 							<p:commandButton class="btn btn-success float-right mt-4"
-									action="#{adminUsuarioController.salvar}"
-									value="Salvar" />
+								action="#{adminUsuarioController.salvar}" value="Salvar" />
 						</div>
 					</div>
 				</div>

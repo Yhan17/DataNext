@@ -1,5 +1,6 @@
 package br.unitins.datanext.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -7,6 +8,7 @@ import javax.persistence.ManyToOne;
 public class Pessoa extends DefaultEntity<Pessoa>{
 	private String nome;
 	private String nif;
+	@Column(unique=true, nullable=false) 
 	private String email;
 	private String telefone;
 	@ManyToOne

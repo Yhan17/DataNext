@@ -60,15 +60,16 @@ public class ArmazemRepository extends Repository<Armazem>{
 		
 	}
 	
-	public List<Armazem> findLocation() throws RepositoryException {
+	public List<Object[]> findLocation() throws RepositoryException {
 		
 			try {
 				EntityManager em = JPAUtil.getEntityManager();
 				StringBuffer sql = new StringBuffer();
 				sql.append("SELECT ");
-				sql.append("  a.sigla,a.localizacao.latitude,a.localizacao.longitude ");
+				sql.append("  a.sigla,l.latitude,l.longitude ");
 				sql.append("FROM ");
-				sql.append("  Armazem a ");
+				sql.append("  Armazem a, Localizacao l ");
+				sql.append("  WHERE a.localizacao_id = l.id ");
 				sql.append("  ORDER BY a.id ");
 
 				Query query = em.createNativeQuery(sql.toString());

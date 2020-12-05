@@ -9,7 +9,7 @@ import br.unitins.datanext.application.RepositoryException;
 import br.unitins.datanext.models.DefaultEntity;
 import br.unitins.datanext.models.MarcaVentilacao;
 
-public class Repository<T extends DefaultEntity<T>> {
+public class Repository<T extends DefaultEntity<? super T>> {
 
 	private EntityManager entityManager;
 	private Repository<T> repository;
@@ -34,9 +34,9 @@ public class Repository<T extends DefaultEntity<T>> {
 		try { 
 			return getEntityManager().merge(entity);
 		} catch (Exception e) {
-			System.out.println("Erro ao salvar.");
-			e.printStackTrace();
-			throw new RepositoryException("Erro ao Salvar.");
+//			e.printStackTrace();
+			throw new RepositoryException(e.getCause().getCause().getMessage());
+
 		} 
 	
 	}

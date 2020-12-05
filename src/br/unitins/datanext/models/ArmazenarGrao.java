@@ -17,6 +17,7 @@ public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
 	private Double pressaoVaporAr;
 	private Double temperatura;
 	private String condicaoArmazenagem;
+	private String situacaoGrao;
 	private String etapaArmazenamento;
 	private Double quantidadeArmazenada;
 	@ManyToOne
@@ -141,6 +142,14 @@ public class ArmazenarGrao extends DefaultEntity<ArmazenarGrao> {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getSituacaoGrao() {
+		return situacaoGrao;
+	}
+
+	public void setSituacaoGrao(String situacaoGrao) {
+		this.situacaoGrao = situacaoGrao;
 	}
 
 }

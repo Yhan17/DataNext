@@ -59,7 +59,7 @@
 			<!-- Show SQL formatted -->
 			<property name="hibernate.format_sql" value="true" />
 			
-			<property name="hibernate.hbm2ddl.import_files" value="/META-INF/usuario.sql,/META-INF/estados.sql,/META-INF/cidades.sql,/META-INF/triggers.sql" />
+			<property name="hibernate.hbm2ddl.import_files" value="/META-INF/estados.sql,/META-INF/cidades.sql,/META-INF/usuario.sql,/META-INF/triggers.sql" />
 			<property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
 		</properties>
 	</persistence-unit>
