@@ -79,14 +79,18 @@
 								</div>
 								<div class="col-md-12"
 									style="display: #{empty adminPlanoDeCustoController.listaDependente ? 'none' : ''}">
+									<div style="width:100%;display:flex">
 									<p:commandButton update="@none" process="@this"
+										id="selecao"
 										actionListener="#{adminPlanoDeCustoController.abrirPlanoListing}"
 										disabled="#{!adminPlanoDeCustoController.entity.dependentes.isEmpty()}"
-										value="Selecionar Dependentes" style="width: 100%">
+										value="Selecionar Dependentes" style="width: 50%">
 										<p:ajax event="dialogReturn"
 											listener="#{adminPlanoDeCustoController.obterPlanoListing}"
 											update="@form quantidade" />
 									</p:commandButton>
+									<p:commandButton style="width: 50%" value="Remover Dependentes" disabled="#{adminPlanoDeCustoController.entity.dependentes.isEmpty()}" action="#{adminPlanoDeCustoController.clearDependentes}" process="@this" update="@this selecao quantidade"></p:commandButton>
+									</div>
 								<p:outputLabel id="quantidade" style="text-align:center" value="Dependentes Selecionados: #{!adminPlanoDeCustoController.entity.dependentes.isEmpty() ? adminPlanoDeCustoController.entity.dependentes.size() : 0}"></p:outputLabel>
 								</div>
 							</div>

@@ -75,6 +75,9 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 	        getListaDependente().remove(plano);
 	    }
 	
+	 public void clearDependentes() {
+		 getEntity().getDependentes().clear();
+	 }
 	
 	@Override
 	public String salvar() {
