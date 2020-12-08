@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="growl" globalOnly="false" />
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Plano de Contas</h4>
+
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="contas.xhtml?faces-redirect=true"
+										value="Voltar" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+								<div class="col-md-4">
+									<label>Descrição <span style="color: red">*</span></label>
+									<p:inputText id="itMarca" required="true"
+										value="#{adminPlanoDeCustoController.entity.descricao}"
+										styleClass="form-control"></p:inputText>
+
+								</div>
+								<div class="col-md-4">
+									<label>Dt. Contabilidade <span style="color: red">*</span></label>
+									<p:datePicker style="width:100%" id="popup" required="true"
+										value="#{adminPlanoDeCustoController.entity.dataContabilidade}">
+									</p:datePicker>
+
+								</div>
+								<div class="col-md-4">
+									<label>Bloqueado <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminPlanoDeCustoController.entity.bloqueado}">
+										<f:selectItem itemValue="true" itemLabel="Sim" />
+										<f:selectItem itemValue="false" itemLabel="Não" />
+									</p:selectOneMenu>
+
+								</div>
+								<div class="col-md-4">
+									<label>Obrigatório <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminPlanoDeCustoController.entity.obrigatorio}">
+										<f:selectItem itemValue="true" itemLabel="Sim" />
+										<f:selectItem itemValue="false" itemLabel="Não" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-4">
+									<label>Tipo de Conta <span style="color: red">*</span></label>
+
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminPlanoDeCustoController.entity.tipoConta}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminPlanoDeCustoController.listaTipoConta}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.label}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-4">
+									<label>Preço <span style="color: red">*</span></label>
+									<p:inputText id="itPreco"
+										value="#{adminPlanoDeCustoController.entity.preco}"
+										required="true" styleClass="form-control"></p:inputText>
+
+								</div>
+								<div class="col-md-12"
+									style="display: #{empty adminPlanoDeCustoController.listaDependente ? 'none' : ''}">
+									<div style="width: 100%; display: flex">
+										<p:commandButton update="@none" process="@this" id="selecao"
+											actionListener="#{adminPlanoDeCustoController.abrirPlanoListing}"
+											disabled="#{!adminPlanoDeCustoController.entity.dependentes.isEmpty()}"
+											value="Selecionar Dependentes" style="width: 50%">
+											<p:ajax event="dialogReturn"
+												listener="#{adminPlanoDeCustoController.obterPlanoListing}"
+												update="@form quantidade" />
+										</p:commandButton>
+										<p:commandButton style="width: 50%"
+											value="Remover Dependentes"
+											disabled="#{adminPlanoDeCustoController.entity.dependentes.isEmpty()}"
+											action="#{adminPlanoDeCustoController.clearDependentes}"
+											process="@this" update="@this selecao quantidade"></p:commandButton>
+									</div>
+									<p:outputLabel id="quantidade" style="text-align:center"
+										value="Dependentes Selecionados: #{!adminPlanoDeCustoController.entity.dependentes.isEmpty() ? adminPlanoDeCustoController.entity.dependentes.size() : 0}"></p:outputLabel>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<p:commandButton class="btn btn-success float-right mt-4"
+								action="#{adminPlanoDeCustoController.salvar}" process="@form"
+								update="@form growl" value="Salvar" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

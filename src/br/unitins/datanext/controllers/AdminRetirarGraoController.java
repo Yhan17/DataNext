@@ -153,6 +153,9 @@ public class AdminRetirarGraoController extends Controller<RetirarGrao> {
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
 			Util.addErrorMessage("Erro ao Salvar.");
 		}
 		

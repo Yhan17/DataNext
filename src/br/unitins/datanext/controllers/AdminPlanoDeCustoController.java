@@ -32,7 +32,6 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 	private List<PlanoDeCusto> listaDependente;
     private List<PlanoDeCusto> dependentesSelecionados;
 
-
 	
 
 
@@ -100,6 +99,9 @@ public class AdminPlanoDeCustoController extends Controller<PlanoDeCusto> {
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
 			Util.addErrorMessage("Erro ao Salvar.");
 		}
 		

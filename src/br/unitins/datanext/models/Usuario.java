@@ -6,9 +6,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+
+
 @Entity
 @Table(name = "\"usuario\"")
-public class Usuario extends DefaultEntity<Usuario> {
+public class Usuario extends DefaultEntity<Usuario>  {
+
+
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true)
 	private Pessoa pessoa;
@@ -30,4 +36,5 @@ public class Usuario extends DefaultEntity<Usuario> {
 		this.senha = senha;
 	}
 
+	
 }

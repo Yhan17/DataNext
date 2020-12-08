@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="growl" sticky="false" life="500" />
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Marca Ventilação</h4>
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="marcaForm.xhtml?faces-redirect=true"
+										value="Adicionar novo" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-10">
+									<p:inputText id="dtFiltro"
+										value="#{adminMarcaController.filtro}"
+										styleClass="form-control"></p:inputText>
+								</div>
+								<div class="col-md-2">
+									<p:commandButton
+										actionListener="#{adminMarcaController.pesquisar}"
+										value="Pesquisar" process="@this dtFiltro" update="dtDados" />
+								</div>
+							</div>
+							<br />
+							<div class="">
+								<p:dataTable rows="10" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+									rowsPerPageTemplate="5,10,15" id="dtDados"
+									value="#{adminMarcaController.listaMarcaVentilacao}" var="obj">
+									<p:column>
+										<f:facet name="header">Id</f:facet>
+										<p:outputLabel value="#{obj.id}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Marca</f:facet>
+										<p:outputLabel value="#{obj.marca}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Editar</f:facet>
+										<p:commandButton value="Editar" style="width: 100%"
+											action="#{adminMarcaController.editar(obj)}"></p:commandButton>
+									</p:column>
+									<p:column>
+										<f:facet name="header">Deletar</f:facet>
+										<p:commandButton value="Excluir" style="width: 100%"
+											action="#{adminMarcaController.excluir(obj)}" process="@this"
+											update="dtDados"></p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

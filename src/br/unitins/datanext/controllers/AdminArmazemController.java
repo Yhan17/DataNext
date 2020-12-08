@@ -21,6 +21,7 @@ import br.unitins.datanext.models.Armazem;
 import br.unitins.datanext.models.Localizacao;
 import br.unitins.datanext.models.MarcaVentilacao;
 import br.unitins.datanext.models.Ventilacao;
+import br.unitins.datanext.repository.AgricultorRepository;
 import br.unitins.datanext.repository.ArmazemRepository;
 import br.unitins.datanext.repository.Repository;
 import br.unitins.datanext.repository.VentilacaoRepository;
@@ -33,7 +34,7 @@ public class AdminArmazemController extends Controller<Armazem> {
 	private List<Armazem> listaArmazem;
 	private ApplicationPart imagem;
 	private List<Ventilacao> listaVentilacao;
-
+	private String filtro;
 	public ApplicationPart getImagem() {
 		return imagem;
 	}
@@ -153,6 +154,9 @@ public class AdminArmazemController extends Controller<Armazem> {
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
 			Util.addErrorMessage("Erro ao Salvar.");
 		}
 		
@@ -215,5 +219,25 @@ public class AdminArmazemController extends Controller<Armazem> {
 		limpar();
 		return "armazemForm.xhtml?faces-redirect=true";
 	}
+	
+	public String getFiltro() {
+		return filtro;
+	}
 
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
+	public void pesquisar() {
+		EntityManager em = JPAUtil.getEntityManager();
+		ArmazemRepository repo = new ArmazemRepository();
+		try {
+			setListaArmazem(repo.findByInfo(getFiltro()));
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+			Util.addErrorMessage("Problema ao excluir.");
+			setListaArmazem(null);
+		}
+	}
+	
 }

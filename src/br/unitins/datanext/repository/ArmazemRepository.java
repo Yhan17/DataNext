@@ -36,7 +36,7 @@ public class ArmazemRepository extends Repository<Armazem>{
 		
 	}
 	
-	public List<Armazem> findByInfo(Armazem agr) throws RepositoryException{ 
+	public List<Armazem> findByInfo(String agr) throws RepositoryException{ 
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
 			StringBuffer jpql = new StringBuffer();
@@ -45,11 +45,11 @@ public class ArmazemRepository extends Repository<Armazem>{
 			jpql.append("FROM ");
 			jpql.append("  Armazem a ");
 			jpql.append("WHERE ");
-			jpql.append("  a.sigla = :sigla ");
+			jpql.append("  UPPER(a.ventilacao.nome) like UPPER(:sigla) ");
 			jpql.append("  ORDER BY a.id ");
 			
 			Query query = em.createQuery(jpql.toString());
-			query.setParameter("sigla",  agr.getSigla()  );
+			query.setParameter("sigla", "%"+ agr + "%"  );
 			
 			return query.getResultList();
 		} catch (Exception e) {

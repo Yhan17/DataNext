@@ -29,7 +29,7 @@ public class AdminTemplateController implements Serializable {
 	public String encerrarSessao() {
 		// encerrando a sessao
 		Session.getInstance().invalidateSession();
-		return "index.xhtml?faces-redirect=true";
+		return "/pages/index.xhtml?faces-redirect=true";
 	}
 
 }

@@ -36,7 +36,7 @@ public class AgricultorRepository extends Repository<Agricultor>{
 		
 	}
 	
-	public List<Agricultor> findByInfo(Agricultor agr) throws RepositoryException{ 
+	public List<Agricultor> findByInfo(String agr) throws RepositoryException{ 
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
 			StringBuffer jpql = new StringBuffer();
@@ -45,11 +45,13 @@ public class AgricultorRepository extends Repository<Agricultor>{
 			jpql.append("FROM ");
 			jpql.append("  Agricultor a ");
 			jpql.append("WHERE ");
-			jpql.append("  a.nome = :nome ");
+			jpql.append("  UPPER(a.pessoa.nome) like UPPER(:nome) ");
+			jpql.append("  OR a.pessoa.nif like :cpf ");
 			jpql.append("  ORDER BY a.id ");
 			
 			Query query = em.createQuery(jpql.toString());
-			query.setParameter("nome",  agr.getPessoa().getNome()  );
+			query.setParameter("nome", "%"+ agr + "%" );
+			query.setParameter("cpf",  "%"+ agr + "%" );
 			
 			return query.getResultList();
 		} catch (Exception e) {

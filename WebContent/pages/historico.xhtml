@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Situação Armazém</h4>
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton
+										action="#{adminSituacaoArmazemController.generateRelatorio}"
+										value="Gerar Relatório" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="col-md-12" style="padding: 0 0 0 0">
+								<p style="width: 100%;">
+									<b>Legenda:</b> <span
+										style="margin-right: 10px; margin-left: 5px;"> <i
+										class="fa fa-square" aria-hidden="true"
+										style="color: #084600;"></i> Vazio
+									</span> <span style="margin-right: 10px;"> <i
+										class="fa fa-square" aria-hidden="true"
+										style="color: #084aff;"></i>Parcialmente Vazio
+									</span> <span style="margin-right: 10px;"> <i
+										class="fa fa-square" aria-hidden="true"
+										style="color: #e7eb14;"></i> Parcialmente Cheio
+									</span> <span style="margin-right: 10px;"> <i
+										class="fa fa-square" aria-hidden="true"
+										style="color: #fc0000;"></i> Lotado
+									</span>
+								</p>
+							</div>
+
+							<div class="">
+								<p:dataTable rows="10" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+									rowsPerPageTemplate="5,10,15" id="dtDados"
+									value="#{adminSituacaoArmazemController.listaSituacao}"
+									var="obj">
+									<p:column>
+										<f:facet name="header">Id</f:facet>
+										<p:outputLabel value="#{obj.id}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Armazem Sigla</f:facet>
+										<p:outputLabel value="#{obj.armazem.sigla}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Armazem capacidade</f:facet>
+										<p:outputLabel value="#{obj.armazem.capacidade}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Quantidade Armazenada</f:facet>
+										<p:outputLabel value="#{obj.quantidadeArmazenada}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Status</f:facet>
+										<i class="fa fa-square" aria-hidden="true"
+											style="color:
+							    			#{obj.status.id == 1 ? '#084600' :
+							    			 (obj.status.id == 2 ? '#084aff' : (
+							    			 obj.status.id == 3 ? '#e7eb14' : (
+							    			 obj.status.id == 4 ? '#fc0000' : '#00000'))) };"></i>
+
+
+									</p:column>
+
+
+								</p:dataTable>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

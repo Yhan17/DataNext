@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+					<p:growl id="growl" sticky="false" life="800" />
+		
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Retirar Grãos</h4>
+
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton
+										action="armazenarGraos.xhtml?faces-redirect=true"
+										value="Voltar" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+
+								<div class="col-md-3">
+									<label>Armazem <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminRetirarGraoController.entity.armazem}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaArmazem}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.sigla}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-3">
+									<label>Grao <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminRetirarGraoController.entity.grao}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaGrao}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-3">
+									<label>Motorista <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminRetirarGraoController.entity.motorista}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaMotorista}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.pessoa.nome}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-3">
+									<label>Agricultor <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminRetirarGraoController.entity.agricultor}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminRetirarGraoController.listaAgricultor}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.pessoa.nome}" />
+									</p:selectOneMenu>
+								</div>
+								
+								<div class="col-md-6">
+									<label>Endereço da chegada de grãos <span style="color: red">*</span></label>
+									<p:inputText style="width:100%" required="true"
+										value="#{adminRetirarGraoController.entity.endereco.endereco}"></p:inputText>
+								</div>
+								<div class="col-md-6">
+									<label>Quantidade a ser Retirada <span style="color: red">*</span></label>
+									<p:inputNumber id="input2" style="width:100%" required="true"
+										value="#{adminRetirarGraoController.entity.quantidade}">
+									</p:inputNumber>
+								</div>
+
+
+
+							</div>
+						</div>
+						<div class="card-footer py-4">
+													<p:commandButton class="btn btn-success float-right mt-4"
+										action="#{adminRetirarGraoController.salvar}"
+										value="Salvar" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

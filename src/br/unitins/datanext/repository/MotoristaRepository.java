@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import br.unitins.datanext.application.JPAUtil;
 import br.unitins.datanext.application.RepositoryException;
-import br.unitins.datanext.models.Agricultor;
+
 import br.unitins.datanext.models.Motorista;
 
 
@@ -37,7 +37,7 @@ public class MotoristaRepository extends Repository<Motorista>{
 		
 	}
 	
-	public List<Motorista> findByInfo(Motorista mot) throws RepositoryException{ 
+	public List<Motorista> findByInfo(String agr) throws RepositoryException{ 
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
 			StringBuffer jpql = new StringBuffer();
@@ -46,11 +46,13 @@ public class MotoristaRepository extends Repository<Motorista>{
 			jpql.append("FROM ");
 			jpql.append("  Motorista m ");
 			jpql.append("WHERE ");
-			jpql.append("  m.pessoa.nome = :nome ");
+			jpql.append("  UPPER(m.pessoa.nome) like UPPER(:nome) ");
+			jpql.append("  OR m.pessoa.nif like :cpf ");
 			jpql.append("  ORDER BY m.id ");
 			
 			Query query = em.createQuery(jpql.toString());
-			query.setParameter("nome",  mot.getPessoa().getNome()  );
+			query.setParameter("nome", "%"+ agr + "%" );
+			query.setParameter("cpf",  "%"+ agr + "%" );
 			
 			return query.getResultList();
 		} catch (Exception e) {

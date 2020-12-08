@@ -25,6 +25,7 @@ import br.unitins.datanext.models.Pessoa;
 import br.unitins.datanext.repository.AgricultorRepository;
 import br.unitins.datanext.repository.CidadeRepository;
 import br.unitins.datanext.repository.Repository;
+import br.unitins.datanext.repository.UnidadeDeMedidaRepository;
 
 @Named("adminAgricultorController")
 @ViewScoped
@@ -33,7 +34,7 @@ public class AdminAgricultorController extends Controller<Agricultor> {
 	private static final long serialVersionUID = 4920291533243512954L;
 	private List<Agricultor> listaAgricultor;
 	private ApplicationPart imagem;
-
+	private String filtro;
 	public ApplicationPart getImagem() {
 		return imagem;
 	}
@@ -134,6 +135,9 @@ public class AdminAgricultorController extends Controller<Agricultor> {
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
 			Util.addErrorMessage("Erro ao Salvar.");
 		}
 		
@@ -203,6 +207,28 @@ public class AdminAgricultorController extends Controller<Agricultor> {
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 			return new ArrayList<Cidade>();
+		}
+	}
+	
+	
+	
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
+	public void pesquisar() {
+		EntityManager em = JPAUtil.getEntityManager();
+		AgricultorRepository repo = new AgricultorRepository();
+		try {
+			setListaAgricultor(repo.findByInfo(getFiltro()));
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+			Util.addErrorMessage("Problema ao excluir.");
+			setListaAgricultor(null);
 		}
 	}
 

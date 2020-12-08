@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="growl" sticky="false" life="500" />
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Grãos</h4>
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="graosForm.xhtml?faces-redirect=true"
+										value="Adicionar novo" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Unidade De Medida *</label>
+										<p:selectOneMenu id="dtFiltro1" style="width:100%"
+											styleClass="unidadeDeMedida"
+											value="#{adminGraoController.unidadeDeMedida}">
+											<f:selectItem itemLabel="Selecione ..." />
+											<f:selectItems
+												value="#{adminGraoController.listaUnidadeMedida}" var="obj"
+												itemValue="#{obj}" itemLabel="#{obj.unidadeDeMedida}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Categoria *</label>
+										<p:selectOneMenu id="dtFiltro2" style="width:100%"
+											styleClass="categoria"
+											value="#{adminGraoController.categoria}">
+											<f:selectItem itemLabel="Selecione ..." />
+											<f:selectItems value="#{adminGraoController.listaCategoria}"
+												var="obj" itemValue="#{obj}" itemLabel="#{obj.sigla}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<p:commandButton style="width:100%; margin-top: 28px"
+										styleClass="buttonSearch"
+										actionListener="#{adminGraoController.pesquisar}"
+										value="Pesquisar" process="@this dtFiltro1 dtFiltro2"
+										update="dtDados" icon="pi pi-search" />
+
+								</div>
+
+							</div>
+							<div class="">
+								<p:dataTable rows="10" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+									rowsPerPageTemplate="5,10,15" id="dtDados"
+									value="#{adminGraoController.listaGrao}" var="obj">
+									<p:column>
+										<f:facet name="header">Id</f:facet>
+										<p:outputLabel value="#{obj.id}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Nome</f:facet>
+										<p:outputLabel value="#{obj.nome}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Categoria</f:facet>
+										<p:outputLabel value="#{obj.categoria.sigla}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Unidade De Medida</f:facet>
+										<p:outputLabel value="#{obj.unidadeDeMedida.unidadeDeMedida}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Editar</f:facet>
+										<p:commandButton value="Editar" style="width: 100%"
+											action="#{adminGraoController.editar(obj)}"></p:commandButton>
+									</p:column>
+									<p:column>
+										<f:facet name="header">Deletar</f:facet>
+										<p:commandButton value="Excluir" style="width: 100%"
+											action="#{adminGraoController.excluir(obj)}" process="@this"
+											update="@form"></p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

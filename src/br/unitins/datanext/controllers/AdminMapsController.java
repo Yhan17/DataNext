@@ -14,8 +14,6 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import br.unitins.datanext.application.RepositoryException;
-import br.unitins.datanext.models.Armazem;
-import br.unitins.datanext.models.ArmazenarGrao;
 import br.unitins.datanext.repository.ArmazemRepository;
 
 @Named("adminMapsController")
@@ -33,14 +31,6 @@ public class AdminMapsController implements Serializable{
     	maps = new DefaultMapModel();
           
     	
-        //Shared coordinates
-//        LatLng coord1 = new LatLng(36.879466, 30.667648);
-//        LatLng coord2 = new LatLng(36.883707, 30.689216);
-//        LatLng coord3 = new LatLng(36.879703, 30.706707);
-//        LatLng coord4 = new LatLng(36.885233, 30.702323);
-
-          
-        //Basic marker
     	if(!getArmazem().isEmpty()) {
     		for (int i = 0; i < getArmazem().size(); i++) {
     			System.out.println(getArmazem().get(i)[0]);
@@ -53,9 +43,7 @@ public class AdminMapsController implements Serializable{
 			}
     		
     	}
-//        maps.addOverlay(new Marker(coord2, "Ataturk Parki"));
-//        maps.addOverlay(new Marker(coord3, "Karaalioglu Parki"));
-//        maps.addOverlay(new Marker(coord4, "Kaleici"));
+
     }
   
     public List<Object[]> getArmazem() {

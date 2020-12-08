@@ -21,6 +21,7 @@ import br.unitins.datanext.models.Estado;
 import br.unitins.datanext.models.MarcaCaminhao;
 import br.unitins.datanext.models.Motorista;
 import br.unitins.datanext.models.Pessoa;
+import br.unitins.datanext.repository.AgricultorRepository;
 import br.unitins.datanext.repository.CidadeRepository;
 import br.unitins.datanext.repository.MotoristaRepository;
 import br.unitins.datanext.repository.Repository;
@@ -31,7 +32,7 @@ public class AdminMotoristaController extends Controller<Motorista> {
 
 	private static final long serialVersionUID = 4920291533243512954L;
 	private List<Motorista> listaMotorista;
-
+	private String filtro;
 	public AdminMotoristaController() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.keep("flashMotorista");
@@ -90,6 +91,9 @@ public class AdminMotoristaController extends Controller<Motorista> {
 			repo.rollbackTransaction();
 			System.out.println("Erro ao salvar.");
 			e.printStackTrace();
+			FacesContext.getCurrentInstance()
+		    .getExternalContext()
+		    .getFlash().setKeepMessages(true);
 			Util.addErrorMessage("Erro ao Salvar.");
 		}
 		
@@ -133,5 +137,23 @@ public class AdminMotoristaController extends Controller<Motorista> {
 			return new ArrayList<Cidade>();
 		}
 	}
+	public String getFiltro() {
+		return filtro;
+	}
 
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
+	public void pesquisar() {
+		EntityManager em = JPAUtil.getEntityManager();
+		MotoristaRepository repo = new MotoristaRepository();
+		try {
+			setListaMotorista(repo.findByInfo(getFiltro()));
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+			Util.addErrorMessage("Problema ao excluir.");
+			setListaMotorista(null);
+		}
+	}
 }

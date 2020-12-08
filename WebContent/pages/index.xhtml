@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:jsf="http://xmlns.jcp.org/jsf"
+	lang="en">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+		<link rel="stylesheet"
+			href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" />
+		<link rel="stylesheet"
+			href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" />
+		<link rel='stylesheet'
+			href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' />
+		<link rel='stylesheet'
+			href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</f:facet>
+	<link rel="stylesheet"
+		href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+	<link
+		href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css'
+		rel='stylesheet' />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/venobox/1.9.1/venobox.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<h:outputStylesheet name="css/homePage.css"></h:outputStylesheet>
+	<h:outputStylesheet name="css/owl.carousel.min.css"></h:outputStylesheet>
+</h:head>
+
+<h:body>
+
+	<!-- ======= Top Bar ======= -->
+	<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+		<div class="container d-flex">
+			<div class="contact-info mr-auto">
+				<i class="icofont-envelope"></i> <a
+					href="mailto:contact@example.com">contato@datanext.com</a> <i
+					class="icofont-phone"></i> +55 (63) 90000-0000
+			</div>
+			<div class="social-links">
+				<a href="#" class="twitter"><i class="icofont-twitter"></i></a> <a
+					href="#" class="facebook"><i class="icofont-facebook"></i></a> <a
+					href="#" class="instagram"><i class="icofont-instagram"></i></a> <a
+					href="#" class="skype"><i class="icofont-skype"></i></a> <a
+					href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<!-- ======= Header ======= -->
+	<header id="header" class="fixed-top">
+		<div class="container d-flex align-items-center">
+
+			<!--       <h1 class="logo mr-auto"><a href="index.html">DataNExt</a></h1> -->
+			<!-- Uncomment below if you prefer to use an image logo -->
+			<a href="index.xhtml" class="logo mr-auto"><img
+				src="../resources/layout/images/logo.png" alt="" class="img-fluid" /></a>
+
+
+			<a href="login.xhtml" class="get-started-btn scrollto">Login</a>
+
+		</div>
+	</header>
+	<!-- End Header -->
+
+	<!-- ======= Hero Section ======= -->
+	<section id="hero">
+		<div id="heroCarousel" class="carousel slide carousel-fade"
+			data-ride="carousel">
+
+			<ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+			<div class="carousel-inner" role="listbox">
+
+				<!-- Slide 1 -->
+				<div class="carousel-item active"
+					style="background-image: url(../resources/layout/images/slides/slide-1.jpg)">
+					<div class="carousel-container">
+						<div class="container">
+							<h2 class="animate__animated animate__fadeInDown">
+								Seja bem vindo a <span>DataNext</span>
+							</h2>
+							<p class="animate__animated animate__fadeInUp">Serviço de
+								gerenciamento e armazenagem de grãos em silos para sua fazenda.</p>
+							<a href="#about"
+								class="btn-get-started animate__animated animate__fadeInUp scrollto">Ler
+								Mais</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide 2 -->
+				<div class="carousel-item"
+					style="background-image: url(../resources/layout/images/slides/slide-2.jpg)">
+					<div class="carousel-container">
+						<div class="container">
+							<h2 class="animate__animated animate__fadeInDown">Transporte
+								e Armazenagem</h2>
+							<p class="animate__animated animate__fadeInUp">Integrado com
+								um sistema de transporte de grãos e cadastros de motoristas
+								sempre à disposição.</p>
+							<a href="#about"
+								class="btn-get-started animate__animated animate__fadeInUp scrollto">Ler
+								Mais</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slide 3 -->
+				<div class="carousel-item"
+					style="background-image: url(../resources/layout/images/slides/slide-3.png)">
+					<div class="carousel-container">
+						<div class="container">
+							<h2 class="animate__animated animate__fadeInDown">Integrado
+								com as mais altas tecnologias</h2>
+							<p class="animate__animated animate__fadeInUp">Preocupados
+								com a qualidade de armazenagem, a DataNext oferece um sistema
+								totalmente adaptado á condição dos grãos para seu armazém,
+								mostrando de maneira responsiva toda as etapas necessárias para
+								o menor tempo de armazenagem possível.</p>
+							<a href="#about"
+								class="btn-get-started animate__animated animate__fadeInUp scrollto">Ler
+								Mais</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<a class="carousel-control-prev" href="#heroCarousel" role="button"
+				data-slide="prev"> <span
+				class="carousel-control-prev-icon icofont-simple-left"
+				aria-hidden="true"></span> <span class="sr-only">Anterior</span>
+			</a> <a class="carousel-control-next" href="#heroCarousel" role="button"
+				data-slide="next"> <span
+				class="carousel-control-next-icon icofont-simple-right"
+				aria-hidden="true"></span> <span class="sr-only">Próximo</span>
+			</a>
+
+		</div>
+	</section>
+	<!-- End Hero -->
+
+	<main id="main">
+
+		<!-- ======= Featured Services Section ======= -->
+		<section id="featured-services" class="featured-services section-bg">
+			<div class="container">
+
+				<div class="row no-gutters">
+					<div class="col-lg-4 col-md-6">
+						<div class="icon-box">
+							<div class="icon">
+								<i class="icofont-computer"></i>
+							</div>
+							<h4 class="title">
+								<a href="">Controle Online</a>
+							</h4>
+							<p class="description">O mais alto nível de sistema de
+								gerenciamento agrário na tela de seu computador e na palma da
+								sua mão</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="icon-box">
+							<div class="icon">
+								<i class="icofont-image"></i>
+							</div>
+							<h4 class="title">
+								<a href="">Envio de Imagens</a>
+							</h4>
+							<p class="description">Envio de imagens para melhor
+								identificação dos locais.</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="icon-box">
+							<div class="icon">
+								<i class="icofont-tasks-alt"></i>
+							</div>
+							<h4 class="title">
+								<a href="">Controle de Finanças</a>
+							</h4>
+							<p class="description">Integrado com um sistema de finanças
+								para controle de despesas com sua fazenda</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- End Featured Services Section -->
+
+		<!-- ======= About Us Section ======= -->
+		<section id="about" class="about">
+			<div class="container">
+
+				<div class="section-title">
+					<h2>Sobre Nós</h2>
+					<p>Blá Blá Blá, trabalho de tópicos 2. Essa descrição está aqui
+						simplesmente para ocupar lugar de um Lorem Ipsum então pode
+						ignorar por hora.</p>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-6 order-1 order-lg-2">
+						<img src="../resources/layout/images/imagem-lateral.jpg" class="img-fluid" alt="" />
+					</div>
+					<div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+						<h3>Sistema de gerenciamento de armazéns e controle de
+							estoque integrado.</h3>
+						<p class="font-italic">Um sistema que provém a mais alta
+							patente se tratando de consumo de api's, o DataNext avalia a
+							chegada de grãos para sua fazenda e analisa o melhor cenário de
+							armazenagem possível para o mesmo. Além disso está integrado com
+							um sistema de precificação, onde a partir do valor atual de
+							determinado grão o cálculo do aluguel da armazenagem é
+							disponibilizado para você. :)</p>
+						<ul>
+							<li><i class="icofont-check-circled"></i> Consumo de api
+								mostrando o valor do grão.</li>
+							<li><i class="icofont-check-circled"></i> Detalhamento da
+								melhor forma de armazenagem para os grãos de seu cliente.</li>
+							<li><i class="icofont-check-circled"></i> Envio e
+								categorização de imagens.</li>
+						</ul>
+						<p>
+							Descrição meramente ilustrativa para preencher espaço e fingir
+							que tem algo aqui, mas aproveitando sua estadia aqui, já pensou
+							em adotar um animal de estimação? É isso mesmo nem em site da
+							faculdade vc se livra de anúncio, mas calma não pare de ler ainda
+							você tem a chance de deixar de ser sozinho e de quebra fazer uma
+							boa ação, acesse o site: <a href="https://m.procure1amigo.com.br">Procure
+								Um Amigo</a> e procure um amigo para você, vai se surpreender como
+							uma vida vazia pode ser alterada com um simples gesto, e sofás
+							também quando seu cão ou gato detonar ele. :)
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- End About Us Section -->
+
+		<!-- ======= Why Us Section ======= -->
+		<section id="why-us" class="why-us">
+			<div class="container">
+
+				<div class="row no-gutters">
+
+					<div class="col-lg-4 col-md-6 content-item">
+						<span>01</span>
+						<h4>Controle de Armazéns</h4>
+						<p>Controle de Armazém totalmente interativo</p>
+					</div>
+
+					<div class="col-lg-4 col-md-6 content-item">
+						<span>02</span>
+						<h4>Cosumo de Api</h4>
+						<p>Consumo de Api de preço</p>
+					</div>
+
+					<div class="col-lg-4 col-md-6 content-item">
+						<span>03</span>
+						<h4>Envio de Imagens</h4>
+						<p>Envio de imagens para melhor exemplificação dos armazéns</p>
+					</div>
+
+					<div class="col-lg-4 col-md-6 content-item">
+						<span>04</span>
+						<h4>Etapas de Armazenamento</h4>
+						<p>Totalmente atualizado com as etapas de armazenamento em silos</p>
+					</div>
+
+					<div class="col-lg-4 col-md-6 content-item">
+						<span>05</span>
+						<h4>Controle de Acesso</h4>
+						<p>Controle total de quem vai ter acesso ao seu sistema</p>
+					</div>
+
+					<div class="col-lg-4 col-md-6 content-item">
+						<span>06</span>
+						<h4>Plano de Contas</h4>
+						<p>Controle das suas finaças</p>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Why Us Section -->
+
+		<!-- ======= Cta Section ======= -->
+		<section id="cta" class="cta">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-lg-9 text-center text-lg-left">
+						<h3>Peça já o seu</h3>
+						<p>Integre esse sistema na sua fazenda, entre contato com nossa equipe de administração e faça já o seu pedido.</p>
+					</div>
+					<div class="col-lg-3 cta-btn-container text-center">
+						<a class="cta-btn align-middle" href="#contact">Solicitar Sistema</a>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- End Cta Section -->
+
+		<!-- ======= Contact Section ======= -->
+		<section id="contact" class="contact">
+			<div class="container">
+
+				<div class="section-title">
+					<h2>Contato</h2>
+					<p>Formulário de contato para pedido do sistema de gerenciamento de silo.</p>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-5 d-flex align-items-stretch">
+						<div class="info">
+							<div class="address">
+								<i class="icofont-google-map"></i>
+								<h4>Localização:</h4>
+								<p>Palmas - TO, ô terra quente</p>
+							</div>
+
+							<div class="email">
+								<i class="icofont-envelope"></i>
+								<h4>Email:</h4>
+								<p>contato@datanext.com</p>
+							</div>
+
+							<div class="phone">
+								<i class="icofont-phone"></i>
+								<h4>Telefone:</h4>
+								<p>+55 (63) 90000-0000</p>
+							</div>
+
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125632.6745460391!2d-48.417274370221364!3d-10.259883275138547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x933b3439911f1257%3A0x93b8070d05c818f!2sPalmas%2C%20TO!5e0!3m2!1spt-BR!2sbr!4v1603126792049!5m2!1spt-BR!2sbr"
+								frameborder="0" style="border: 0; width: 100%; height: 290px;"></iframe>
+						</div>
+
+					</div>
+
+					<div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+						<form action="forms/contact.php" method="post" role="form"
+							class="php-email-form">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="name">Seu Nome</label> <input type="text"
+										name="name" class="form-control" id="name"
+										data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+									<div class="validate"></div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="name">Seu Email</label> <input type="email"
+										class="form-control" name="email" id="email" data-rule="email"
+										data-msg="Please enter a valid email" />
+									<div class="validate"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="name">Assunto</label> <input type="text"
+									class="form-control" name="subject" id="subject"
+									data-rule="minlen:4"
+									data-msg="Please enter at least 8 chars of subject" />
+								<div class="validate"></div>
+							</div>
+							<div class="form-group">
+								<label for="name">Mensagem</label>
+								<textarea class="form-control" name="message" rows="10"
+									data-rule="required" data-msg="Please write something for us"></textarea>
+								<div class="validate"></div>
+							</div>
+							<div class="mb-3">
+								<div class="loading">Carregando</div>
+								<div class="error-message"></div>
+								<div class="sent-message">Your message has been sent.
+									Thank you!</div>
+							</div>
+							<div class="text-center">
+								<button type="submit">Salvar</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Contact Section -->
+
+
+
+
+
+
+
+
+
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer id="footer">
+		<div class="container">
+			<h3>DataNext</h3>
+			<p>Empresa de controle de Silo.</p>
+			<div class="social-links">
+				<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> <a
+					href="#" class="facebook"><i class="bx bxl-facebook"></i></a> <a
+					href="#" class="instagram"><i class="bx bxl-instagram"></i></a> <a
+					href="#" class="google-plus"><i class="bx bxl-skype"></i></a> <a
+					href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+			</div>
+			<div class="copyright">
+				&#169; Copyright <strong><span>Green</span></strong>. Todos os direitos reservados
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer -->
+
+	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+
+
+	<script
+		src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/pt-BR.js'></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	<script
+		src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js'></script>
+	<script
+		src='https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js'></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+	<h:outputScript name="layout/script/layout.js" />
+	<h:outputScript name="js/jquery.easing.js" />
+	<h:outputScript name="js/owl.carousel.min.js" />
+	<h:outputScript name="js/validate.js" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/venobox/1.9.1/venobox.js"></script>
+	<h:outputScript name="js/main.js" />
+</h:body>
+
+</html>

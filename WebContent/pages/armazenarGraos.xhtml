@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Armazenagem de Grãos</h4>
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton
+										action="armazenarGraosForm.xhtml?faces-redirect=true"
+										value="Adicionar novo" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="">
+								<p:dataTable rows="10" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+									rowsPerPageTemplate="5,10,15" id="dtDados"
+									value="#{adminArmazenarGraoController.listaArmazenarGrao}"
+									var="obj">
+									<p:column>
+										<f:facet name="header">Id</f:facet>
+										<p:outputLabel value="#{row + 1}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Armazém</f:facet>
+										<p:outputLabel value="#{obj.armazem.sigla}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Quantidade</f:facet>
+										<p:outputLabel value="#{obj.quantidadeArmazenada}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Grão</f:facet>
+										<p:outputLabel value="#{obj.grao.nome}">
+
+										</p:outputLabel>
+									</p:column>
+									<p:column>
+										<f:facet name="header">Relatório</f:facet>
+										<p:commandButton value="Relatório" style="width: 100%"
+											action="#{adminArmazenarGraoController.generateRelatorio(obj)}"></p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

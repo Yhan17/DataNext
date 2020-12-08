@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="growl" sticky="false" life="500" />
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Ventilação</h4>
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton
+										action="ventilacaoForm.xhtml?faces-redirect=true"
+										value="Adicionar novo" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="">
+								<p:dataTable rows="10" paginator="true"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+									rowsPerPageTemplate="5,10,15" id="dtDados"
+									value="#{adminVentilacaoController.listaVentilacao}" var="obj">
+									<p:column>
+										<f:facet name="header">Id</f:facet>
+										<p:outputLabel value="#{obj.id}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Nome</f:facet>
+										<p:outputLabel value="#{obj.nome}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Kilowats</f:facet>
+										<p:outputLabel value="#{obj.kilowats}">
+											<f:convertNumber locale="pt_BR" currencySymbol="R$"
+												type="currency" />
+										</p:outputLabel>
+									</p:column>
+									<p:column>
+										<f:facet name="header">Velocidade</f:facet>
+										<p:outputLabel value="#{obj.velocidadeRpm}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">Editar</f:facet>
+										<p:commandButton value="Editar" style="width: 100%"
+											action="#{adminVentilacaoController.editar(obj)}"></p:commandButton>
+									</p:column>
+									<p:column>
+										<f:facet name="header">Deletar</f:facet>
+										<p:commandButton value="Excluir" style="width: 100%"
+											action="#{adminVentilacaoController.excluir(obj)}"
+											process="@this" update="@form"></p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<nav class="d-flex justify-content-end" aria-label="..."></nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

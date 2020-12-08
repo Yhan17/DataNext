@@ -1,0 +1,139 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="growl" sticky="false" life="800" />
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-12">
+									<h4 class="card-title">Perfil</h4>
+								</div>
+
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="card-deck">
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Email<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:inputText style="width:100%" required="true"
+												value="#{perfilController.entity.pessoa.email}" />
+										</p>
+									</div>
+								</div>
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Cpf<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:inputText style="width:100%" required="true"
+												value="#{perfilController.entity.pessoa.nif}" />
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="card-deck">
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Nome<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:inputText style="width:100%" required="true"
+												value="#{perfilController.entity.pessoa.nome}" />
+										</p>
+									</div>
+								</div>
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Telefone<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:inputText style="width:100%" required="true"
+												value="#{perfilController.entity.pessoa.telefone}" />
+										</p>
+									</div>
+								</div>
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Cidade<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:autoComplete style="width:100%" styleClass="city-id"
+												required="true"
+												value="#{perfilController.entity.pessoa.cidade}"
+												forceSelection="true"
+												placeholder="Informe ao menos 3 letras para iniciar a consulta..."
+												minQueryLength="3" dropdown="false" maxResults="5"
+												moreText="Ainda tem mais ..." var="obj"
+												itemLabel="#{obj.nome.concat('-').concat(obj.estado.uf)}"
+												itemValue="#{obj}"
+												completeMethod="#{perfilController.completeCidade}" />
+										</p>
+									</div>
+								</div>
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Senha<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:password id="pwd1" style="width:100%"
+												styleClass="form-control"
+												value="#{perfilController.entity.senha}" match="pwd2"
+												feedback="true" required="true" />
+										</p>
+									</div>
+								</div>
+								<div class="card m-2 shadow-sm">
+									<div class="card-body">
+										<p>
+											<strong>Confirmar Senha<span style="color: red">*</span>:
+											</strong>
+										</p>
+										<p class="card-text">
+											<p:password id="pwd2" style="width:100%"
+												styleClass="form-control"
+												value="#{perfilController.entity.senha}" feedback="true"
+												required="true" />
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="card-footer py-4">
+							<p:commandButton class="btn btn-success float-right mt-4"
+								ajax="false" action="#{perfilController.salvar}" value="Salvar" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

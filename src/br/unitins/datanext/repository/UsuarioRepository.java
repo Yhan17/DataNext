@@ -43,13 +43,37 @@ public class UsuarioRepository extends Repository<Usuario>{
 			jpql.append("SELECT ");
 			jpql.append("  u ");
 			jpql.append("FROM ");
-			jpql.append("  Agricultor u ");
+			jpql.append("  Usuario u ");
 			jpql.append("WHERE ");
 			jpql.append("  u.nome = :nome ");
 			jpql.append("  ORDER BY u.id ");
 			
 			Query query = em.createQuery(jpql.toString());
 			query.setParameter("nome",  agr.getPessoa().getNome()  );
+			
+			return query.getResultList();
+		} catch (Exception e) {
+			System.out.println("Erro ao realizar uma consulta ao banco.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao realizar uma consulta ao banco.");
+		}
+		
+	}
+	
+	public List<Usuario> findByEmail(String email) throws RepositoryException{ 
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			StringBuffer jpql = new StringBuffer();
+			jpql.append("SELECT ");
+			jpql.append("  u ");
+			jpql.append("FROM ");
+			jpql.append("  Usuario u, Pessoa p ");
+			jpql.append("WHERE ");
+			jpql.append("  p.email = :nome ");
+			jpql.append("  ORDER BY u.id ");
+			
+			Query query = em.createQuery(jpql.toString());
+			query.setParameter("nome",  email  );
 			
 			return query.getResultList();
 		} catch (Exception e) {

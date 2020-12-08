@@ -2441,8 +2441,8 @@ body .ui-panel .ui-panel-title {
 }
 body .ui-panel .ui-panel-titlebar {
   border: none;
-  background-color: #1b593c;
-  color: #ffffff;
+  background-color: #fff;
+  color: #000000;
   padding: 0.571em 1em 0.571em 1em;
   font-weight: 700;
   -moz-border-radius-topleft: 3px;
@@ -2548,7 +2548,7 @@ body .ui-panel .ui-panel-titlebar .ui-panel-titlebar-icon.ui-state-hover {
 }
 body .ui-panel .ui-panel-content {
   border: none;
-  background-color: #1b593c;
+  background-color: #fff;
   color: #333333;
   padding: 0.571em 1em;
   border-top: 0 none;
@@ -5877,8 +5877,8 @@ body .ui-dialog {
 }
 body .ui-dialog .ui-dialog-titlebar {
   border: none;
-  background-color: #1b593c;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 0.571em 1em 0.571em 1em;
   font-weight: 700;
   border-bottom: 0 none;
@@ -6001,7 +6001,7 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon-newwin:bef
   content: "";
 }
 body .ui-dialog .ui-dialog-content {
-  background-color: #1b593c;
+  background-color: #fff;
   color: #333333;
   border: 1px solid #c8c8c8;
   padding: 0.571em 1em;

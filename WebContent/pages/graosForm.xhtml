@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="growl" sticky="false" life="800" />
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card ">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Grãos</h4>
+
+								</div>
+								<div class="col-4 text-right">
+									<p:commandButton action="graos.xhtml?faces-redirect=true"
+										value="Voltar" />
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+								<div class="col-md-12">
+									<label>Nome <span style="color: red">*</span></label>
+									<p:inputText required="true" id="itUnidadeMedida"
+										value="#{adminGraoController.entity.nome}"
+										styleClass="form-control"></p:inputText>
+								</div>
+								<div class="col-md-6">
+									<label>Categoria <span style="color: red">*</span></label>
+									<p:selectOneMenu required="true" style="width:100%"
+										value="#{adminGraoController.entity.categoria}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems value="#{adminGraoController.listaCategoria}"
+											var="obj" itemValue="#{obj}" itemLabel="#{obj.sigla}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-6">
+									<label>Unidade De Medida <span style="color: red">*</span></label>
+									<p:selectOneMenu style="width:100%" required="true"
+										value="#{adminGraoController.entity.unidadeDeMedida}">
+										<f:selectItem itemLabel="Selecione ..." />
+										<f:selectItems
+											value="#{adminGraoController.listaUnidadeMedida}" var="obj"
+											itemValue="#{obj}" itemLabel="#{obj.unidadeDeMedida}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-md-12">
+									<label>Descrição</label>
+									<p:inputTextarea id="itDescricao"
+										value="#{adminGraoController.entity.descricao}"
+										styleClass="form-control"></p:inputTextarea>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer py-4">
+							<p:commandButton class="btn btn-success float-right mt-4"
+								action="#{adminGraoController.salvar}" process="@form"
+								update="@form growl" value="Salvar" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>
