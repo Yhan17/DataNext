@@ -18,7 +18,7 @@ public class Main {
 	public static void main(String[] args) {
         try {
         	
-        	String url = "https://www.quandl.com/api/v3/datasets/CEPEA/SOYBEAN_C.json?api_key=398PRmtv-QNJSQuxhS-4";
+        	String url = "https://www.quandl.com/api/v3/datasets/CEPEA/SOYBEAN_C.json?api_key=";
         	
         	HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         	
@@ -26,7 +26,7 @@ public class Main {
         	conn.setRequestProperty("Accept", "application/json");
         	
         	 if (conn.getResponseCode() != 200) {
-        		 System.out.println("Não FUNCIONOU :(");
+        		 System.out.println("NÃ£o FUNCIONOU :(");
              }
 
              BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
